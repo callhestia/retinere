@@ -4,7 +4,7 @@ Retinere to minimalistyczna aplikacja terminalowa do nauki z wykorzystaniem algo
 
 ## Kluczowe funkcje
 
-Program zarządza procesem nauki poprzez automatyczne planowanie kolejności i częstotliwości powtórek, śledząc przy tym dzienne postępy oraz serie nauki (streak). Fiszki przechowywane są w formacie zwykłego tekstu `.txt`, co ułatwia ich ręczną edycję i przenoszenie. 
+Program zarządza procesem nauki poprzez automatyczne planowanie kolejności i częstotliwości powtórek, śledząc przy tym dzienne postępy oraz serie nauki (streak). Fiszki przechowywane są w formacie zwykłego tekstu `.txt`, co ułatwia ich ręczną edycję i przenoszenie. (Możliwe rozwiązanie - pliki w formacie .JSON)
 
 Użytkownik ma do dyspozycji dwa tryby nauki:
 1. **Samoocena** — klasyczny model, w którym użytkownik sam ocenia stopień znajomości odpowiedzi w skali od 0 do 5.
