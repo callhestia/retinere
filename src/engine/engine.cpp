@@ -1,41 +1,52 @@
 #include "engine.hpp"
 #include "Levenshtein.hpp"
 #include <algorithm>
-
+#include <random>
+#include <vector>
 using namespace std;
 
-// Sprawdza odpowiedź użytkownika z tolerancją błędów (przekazuje do czyBladDopuszczalny)
-bool sprawdzOdpowiedz(const string& odpowiedzUzytkownika, const string& poprawnaOdpowiedz,
-                      float prog) {
-    return czyBladDopuszczalny(odpowiedzUzytkownika, poprawnaOdpowiedz, prog);
+int obliczStatusOdpowiedzi(string odpowiedz, Fiszka fiszka, float prog) {
+    
+    if (odpowiedz == fiszka.odpowiedz)
+    {
+        return 0;
+    }
+
+    if (czyBladDopuszczalny(odpowiedz, fiszka.odpowiedz, prog)){
+        return 1;
+    }
+
+    return 2;
 }
 
-// Aktualizuje fiszkę na podstawie oceny (0–5) i zwraca jej nową wersję
-Flashcard aktualizujFiszke(const Flashcard& fiszka, int ocena) {
-    SmResponse wynik = zaplanujPowtorke(ocena, fiszka.combo, fiszka.easeFactor);
-
-    Flashcard zaktualizowana = fiszka;
-    zaktualizowana.combo      = wynik.combo;
-    zaktualizowana.easeFactor = wynik.easeFactor;
-
-    return zaktualizowana;
+float progOdTrybu(int trybLiterowek) {
+    if (trybLiterowek == TRYB_DOKLADNY) return LEVENSHTEIN_DOKLADNY;
+    if (trybLiterowek == TRYB_ULGOWY)   return LEVENSHTEIN_ULGOWY;
+    return LEVENSHTEIN_PROG;
 }
 
-// Przelicza błąd Levenshteina (0.0–1.0) na ocenę SM-2 (0–5)
-static int przeliczBladNaOcene(const string& odpowiedzUzytkownika,
-                                const string& poprawnaOdpowiedz) {
-    int maxLen = static_cast<int>(max(odpowiedzUzytkownika.length(), poprawnaOdpowiedz.length()));
-    if (maxLen == 0) return 5; // oba puste – traktujemy jako sukces
+static Fiszka aktualizujFiszke(Fiszka fiszka, int ocena) {
+    fiszka.poziomTrudnosci = zaplanujPowtorke(ocena, fiszka.poziomTrudnosci);
+    return fiszka;
+}
 
-    int distance = obliczOdleglosc(odpowiedzUzytkownika, poprawnaOdpowiedz);
-    double wspolczynnikBledu = static_cast<double>(distance) / static_cast<double>(maxLen);
+static int przeliczBladNaOcene(string odpowiedzUzytkownika, string poprawnaOdpowiedz) {
+    int maxDlugosc = static_cast<int>(max(odpowiedzUzytkownika.length(), poprawnaOdpowiedz.length()));
+    
+    if (maxDlugosc == 0) 
+    {
+        return 5;
+    }
 
-    if (wspolczynnikBledu == 0.0)  return 5; // idealna odpowiedź
-    if (wspolczynnikBledu <= 0.10) return 4; // drobna literówka
-    if (wspolczynnikBledu <= 0.20) return 3; // kilka błędów
-    if (wspolczynnikBledu <= 0.35) return 2; // częściowa odpowiedź
-    if (wspolczynnikBledu <= 0.50) return 1; // bardzo niedokładna
-    return 0;                                // całkowicie błędna
+    int odleglosc = obliczOdleglosc(odpowiedzUzytkownika, poprawnaOdpowiedz);
+    double wspolczynnikBledu = static_cast<double>(odleglosc) / static_cast<double>(maxDlugosc);
+
+    if (wspolczynnikBledu == 0.0)  return 5;
+    if (wspolczynnikBledu <= 0.20) return 4;
+    if (wspolczynnikBledu <= 0.35) return 3;
+    if (wspolczynnikBledu <= 0.50) return 2;
+    if (wspolczynnikBledu <= 0.70) return 1;
+    return 0;                                // czyli odpowiedz calkowicie bledna
 }
 
 static int ograniczOcene(int ocena) {
@@ -44,23 +55,71 @@ static int ograniczOcene(int ocena) {
     return ocena;
 }
 
-// Wykonuje jeden krok nauki: ocenia odpowiedź i zwraca zaktualizowaną fiszkę
-Flashcard krokNauki(const Flashcard& fiszka, StudyMode tryb,
-                    const string& odpowiedzUzytkownika, int ocena) {
-    int rozwiazanaOcena = 0;
+Fiszka krokNauki(Fiszka fiszka, TrybNauki tryb, string odpowiedzUzytkownika, int ocena) {
+    int finalnaOcena = 0;
 
     switch (tryb) {
-        case StudyMode::MANUAL:
-            // Użytkownik dostarcza ocenę; przycinamy do zakresu 0–5
-            rozwiazanaOcena = ograniczOcene(ocena);
+        case TrybNauki::RECZNY:
+            finalnaOcena = ograniczOcene(ocena);
             break;
 
-        case StudyMode::AUTO:
-            // Automatyczna ocena na podstawie Levenshteina
-            rozwiazanaOcena = przeliczBladNaOcene(odpowiedzUzytkownika, fiszka.answer);
+        case TrybNauki::AUTOMATYCZNY:
+            finalnaOcena = przeliczBladNaOcene(odpowiedzUzytkownika, fiszka.odpowiedz);
             break;
     }
 
-    return aktualizujFiszke(fiszka, rozwiazanaOcena);
+    return aktualizujFiszke(fiszka, finalnaOcena);
 }
 
+double obliczNowaWage(double aktualnaWaga, vector<double> wagi) {
+    double sumaWag = 0.0;
+    int liczbaAktywnych = 0;
+
+    for (double w : wagi) if (w > 0) { 
+        sumaWag += w; liczbaAktywnych++; 
+    }
+
+    double sredniaWaga = liczbaAktywnych > 0 ? sumaWag / liczbaAktywnych : 1.0;
+
+    return min(aktualnaWaga * 2.0, sredniaWaga * 3.0);
+}
+
+int wybierzNastepna(vector<double> wagi, int poprzedniIndeks) {
+
+    double sumaWag = 0.0;
+
+    for (double w : wagi) sumaWag += w;
+
+        if (sumaWag <= 0.0) {
+            return -1;
+        }
+
+    double sumaWagBezPoprzedniej = sumaWag - (poprzedniIndeks >= 0 ? wagi[poprzedniIndeks] : 0.0);
+
+    bool pominPoprzednia = (poprzedniIndeks >= 0) && (sumaWagBezPoprzedniej > 0.0);
+
+    static mt19937 generator(random_device{}());
+
+    uniform_real_distribution<double> rozklad(0.0, pominPoprzednia ? sumaWagBezPoprzedniej : sumaWag);
+
+    double wartoscLosowa = rozklad(generator);
+
+    double sumaSkumulowana = 0.0;
+
+    for (int i = 0; i < (int)wagi.size(); ++i) {
+
+        if (pominPoprzednia && i == poprzedniIndeks) continue;
+        sumaSkumulowana += wagi[i];
+        if (wartoscLosowa < sumaSkumulowana) return i;
+
+    }
+
+    for (int i = (int)wagi.size() - 1; i >= 0; --i) {
+
+        if (pominPoprzednia && i == poprzedniIndeks) continue;
+        if (wagi[i] > 0.0) return i;
+    }
+
+
+    return (int)wagi.size() - 1;
+}

@@ -1,8 +1,0 @@
-1001|Jak wyświetlić zawartość obecnego katalogu?|ls|1|2.5|0|1777000000
-1002|Jak zmienić obecny katalog roboczy?|cd|6|2.6|1|1778000000
-1003|Jak wyświetlić ścieżkę do miejsca, w którym się obecnie znajdujesz?|pwd|1|1.3|0|0
-1004|Jak utworzyć nowy, pusty plik tekstowy?|touch|14|2.8|2|1779000000
-1005|Jak stworzyć nowy folder (katalog)?|mkdir|1|2.5|0|1777000000
-1006|Jak trwale usunąć plik?|rm|3|2.1|1|1777500000
-1007|Jak wyczyścić ekran terminala z poprzednich poleceń?|clear|1|2.5|0|1777200000
-1008|Jak wyświetlić zawartość pliku tekstowego bezpośrednio w konsoli?|cat|1|2.5|0|1777000000

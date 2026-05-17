@@ -1,9 +1,8 @@
 #pragma once
 
 #include <string>
+#include "../config.hpp"
 
-// Oblicza odległość Levenshteina między dwoma łańcuchami znaków
-int obliczOdleglosc(const std::string& s1, const std::string& s2);
+int obliczOdleglosc(std::string s1, std::string s2);
 
-// prog: maksymalny dopuszczalny współczynnik błędu (0.0 – 1.0), domyślnie 0.3 (30%)
-bool czyBladDopuszczalny(const std::string& slowo1, const std::string& slowo2, float prog = 0.3f);
+bool czyBladDopuszczalny(std::string slowo1, std::string slowo2, float prog = LEVENSHTEIN_PROG);

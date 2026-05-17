@@ -3,13 +3,16 @@
 #include "../models/flashcard.hpp"
 #include "../config.hpp"
 #include <string>
+#include <vector>
 
-bool sprawdzOdpowiedz(const std::string& odpowiedzUzytkownika, const std::string& poprawnaOdpowiedz,
-                      float prog = LEVENSHTEIN_THRESHOLD);
+Fiszka krokNauki(Fiszka fiszka, TrybNauki tryb, std::string odpowiedzUzytkownika, int ocena = 0);
 
-Flashcard aktualizujFiszke(const Flashcard& fiszka, int ocena);
+double zaplanujPowtorke(int ocena, double poprzedniWspolczynnik);
 
-Flashcard krokNauki(const Flashcard& fiszka, StudyMode tryb,
-                    const std::string& odpowiedzUzytkownika, int ocena = 0);
+int obliczStatusOdpowiedzi(std::string odpowiedz, Fiszka fiszka, float prog);
 
-SmResponse zaplanujPowtorke(int ocena, int combo, double poprzedniWspolczynnik);
+float progOdTrybu(int trybLiterowek);
+
+double obliczNowaWage(double aktualnaWaga, std::vector<double> wagi);
+
+int wybierzNastepna(std::vector<double> wagi, int poprzedniIndeks = -1);

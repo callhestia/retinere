@@ -1,0 +1,31 @@
+Co oznacza skrót SQL?|Structured Query Language|2,5|Bazy Danych
+Jaki klucz jednoznacznie identyfikuje wiersz w tabeli?|Klucz główny (Primary Key)|2,6|Bazy Danych
+Jak usunąć całą strukturę tabeli wraz z danymi?|DROP TABLE|2,5|SQL
+Do jakiej grupy poleceń z rodziny SQL należy instrukcja SELECT?|DQL (Data Query Language) lub ogólnie DML|2,6|SQL
+Co robi funkcja COUNT()?|Zwraca liczbę wierszy spełniających określone kryterium|2,5|SQL
+Rozwiń skrót ACID w kontekście transakcji bazodanowych|Atomicity, Consistency, Isolation, Durability|2,7|Bazy Danych
+Jaka jest główna różnica między instrukcjami DELETE a TRUNCATE?|TRUNCATE to szybsze DDL nie logujące usuwania pojedynczych wierszy, DELETE to DML logujące każdy usunięty wiersz|2,6|SQL
+Do czego służy klauzula GROUP BY?|Do grupowania wierszy o tych samych wartościach, najczęściej używana z funkcjami agregującymi|2,5|SQL
+Jakie polecenie służy do modyfikacji istniejących danych w tabeli?|UPDATE|2,5|SQL
+Który rodzaj złączenia zwraca wyłącznie wiersze mające dopasowanie w obu łączonych tabelach?|INNER JOIN|2,6|SQL
+Czym jest indeks w relacyjnej bazie danych?|Strukturą danych przyspieszającą operacje wyszukiwania kosztem wolniejszego wstawiania i aktualizacji|2,7|Bazy Danych
+Jakiej komendy użyjesz, aby dodać nową kolumnę do istniejącej już tabeli?|ALTER TABLE|2,5|SQL
+Do jakiej grupy poleceń należą GRANT i REVOKE?|DCL (Data Control Language)|2,7|SQL
+Czym różni się LEFT JOIN od INNER JOIN?|LEFT JOIN zwraca wszystkie wiersze z lewej tabeli, nawet jeśli nie mają dopasowania w prawej|2,6|SQL
+Co robi klauzula HAVING i czym różni się od WHERE?|Filtruje dane po grupowaniu (GROUP BY), podczas gdy WHERE filtruje pojedyncze wiersze przed grupowaniem|2,7|SQL
+Jak wylistować pliki i katalogi?|ls|2,6|Linux
+Jak zmienić bieżący katalog?|cd|2,7|Linux
+Jak wyświetlić pełną ścieżkę obecnego katalogu?|pwd|2,6|Linux
+Jak utworzyć nowy, pusty plik?|touch|2,6|Linux
+Jak utworzyć nowy katalog?|mkdir|2,7|Linux
+Jak skopiować plik lub katalog?|cp|2,7|Linux
+Jak przenieść lub zmienić nazwę pliku?|mv|2,7|Linux
+Jak usunąć plik?|rm|2,35|Linux
+Jak usunąć pusty katalog?|rmdir|2,6|Linux
+Jak wyświetlić zawartość pliku w konsoli?|cat|2,7|Linux
+Jak wyszukać ciąg znaków wewnątrz pliku?|grep|2,8|Linux
+Jak wyświetlić instrukcję obsługi danego polecenia?|man|2,6|Linux
+Jak sprawdzić aktualne zużycie pamięci RAM?|free -h|2,7|Linux
+Jak wyświetlić listę uruchomionych procesów w czasie rzeczywistym?|top|2,8|Linux
+Jakie polecenie pozwala wykonać komendę z uprawnieniami administratora?|sudo|2,6|Linux
+Testuje, odpowiedz: 5|5|2,5|Test

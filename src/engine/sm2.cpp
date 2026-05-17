@@ -1,26 +1,28 @@
 #include "engine.hpp"
-
 using namespace std;
 
-// Z sygnatury zniknął 'poprzedniInterwal'
-SmResponse zaplanujPowtorke(int ocena, int combo, double poprzedniWspolczynnik) {
-    double wspolczynnik;
+double zaplanujPowtorke(int ocena, double poprzedniWspolczynnik) {
+
+    double wspolczynnik = 0.0;
 
     if (ocena > 3) {
-        // Odpowiedź poprawna
-        combo++;
         wspolczynnik = poprzedniWspolczynnik + (0.1 - (5 - ocena) * (0.08 + (5 - ocena) * 0.02));
-    } else {
-        // Odpowiedź błędna – resetujemy serię
-        combo = 0;
-        wspolczynnik = poprzedniWspolczynnik;
+    } 
+    
+    else {
+        wspolczynnik = poprzedniWspolczynnik - 0.15 - (3 - ocena) * 0.05;
     }
 
-    // Współczynnik łatwości nie może spaść poniżej 1.3
+
+
     if (wspolczynnik < 1.3) {
         wspolczynnik = 1.3;
     }
 
-    // Zwracamy paczkę bez interwału!
-    return {combo, wspolczynnik}; 
+    
+    if (wspolczynnik > 3.5) {
+        wspolczynnik = 3.5;
+    }
+
+    return wspolczynnik;
 }
