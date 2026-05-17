@@ -1,5 +1,8 @@
-# Retinere
-
+<div align="center">
+  <img src="assets/Retinere.svg" alt="Retinere Logo" width="500">
+  
+  <h1>Retinere</h1>
+</div>
 Retinere to minimalistyczna aplikacja terminalowa do nauki z wykorzystaniem algorytmu powtórek rozłożonych w czasie. Projekt napisany na zajęcia z programowania w czystym C++17, stawiający na szybkość, brak zewnętrznych zależności i prostotę. Działa całkowicie z poziomu wiersza poleceń, oferując czas uruchomienia poniżej 100ms.
 
 ## Kluczowe funkcje
