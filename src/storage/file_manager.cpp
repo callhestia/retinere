@@ -6,6 +6,15 @@
 #include <locale>
 #include "file_manager.hpp"
 #include "../config.hpp"
+#include <limits.h>
+#include <cstring>
+#include <cstdlib>
+#ifdef __APPLE__
+#include <mach-o/dyld.h>
+#endif
+#ifdef __linux__
+#include <unistd.h>
+#endif
 
 using namespace std;
 
@@ -21,13 +30,64 @@ vector<Fiszka> wczytajTalie(){
         loc = std::locale::classic();
     }
 
-    ifstream file;
+    auto file_exists = [&](const std::string &p)->bool { std::ifstream t(p); return t.good(); };
+
+    // Try to open the declared path; if it doesn't exist, try common alternatives
+    std::string pathToOpen = g_sciezkaTalii;
+    std::ifstream file;
     file.imbue(loc);
-    file.open(g_sciezkaTalii);
+    file.open(pathToOpen);
+
     if (!file.is_open()) {
-        ofstream newFile(g_sciezkaTalii);
-        newFile.imbue(loc);
-        return deck;
+        // Common fallback candidates (relative to cwd)
+        std::vector<std::string> candidates;
+        candidates.push_back(std::string("decks/deck.txt"));
+        candidates.push_back(std::string("../decks/deck.txt"));
+        candidates.push_back(std::string("../../decks/deck.txt"));
+
+        // Try paths relative to the executable directory
+        char exePathBuf[PATH_MAX];
+        exePathBuf[0] = '\0';
+#if defined(__APPLE__)
+        uint32_t size = sizeof(exePathBuf);
+        if (_NSGetExecutablePath(exePathBuf, &size) == 0) {
+            // success
+        }
+#elif defined(__linux__)
+        ssize_t len = readlink("/proc/self/exe", exePathBuf, sizeof(exePathBuf) - 1);
+        if (len != -1) exePathBuf[len] = '\0';
+#elif defined(_WIN32)
+        // Windows: leave exePathBuf empty (we'll rely on cwd)
+#endif
+        std::string exeDir;
+        if (exePathBuf[0] != '\0') {
+            std::string exePathStr = exePathBuf;
+            auto pos = exePathStr.find_last_of("/\\");
+            if (pos != std::string::npos) exeDir = exePathStr.substr(0, pos);
+        }
+
+        if (!exeDir.empty()) {
+            candidates.push_back(exeDir + "/decks/deck.txt");
+            candidates.push_back(exeDir + "/../decks/deck.txt");
+        }
+
+        bool found = false;
+        for (const auto &cand : candidates) {
+            if (file_exists(cand)) {
+                pathToOpen = cand;
+                file.open(pathToOpen);
+                if (file.is_open()) { found = true; break; }
+            }
+        }
+
+        if (!file.is_open()) {
+            // create an empty file at original path so subsequent saves will work
+            std::ofstream newFile(g_sciezkaTalii);
+            newFile.imbue(loc);
+            return deck;
+        }
+        // if we opened a fallback candidate, update global path so saves go to same file
+        if (pathToOpen != g_sciezkaTalii) g_sciezkaTalii = pathToOpen;
     }
     string line;
     while(getline(file, line)){

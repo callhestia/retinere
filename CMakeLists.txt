@@ -8,11 +8,13 @@ add_executable(retinere
     src/main.cpp
     src/engine/engine.cpp
     src/engine/sm2.cpp
-    src/storage/Flashcard.hpp
     src/engine/Levenshtein.cpp
     src/ui/menu.cpp
     src/storage/file_manager.cpp
 )
+
+target_include_directories(retinere PRIVATE ${CMAKE_SOURCE_DIR}/src)
+target_compile_features(retinere PRIVATE cxx_std_17)
 
 enable_testing()
 add_subdirectory(tests)
