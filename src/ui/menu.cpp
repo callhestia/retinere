@@ -15,6 +15,7 @@
 #include <cmath>
 #include <iomanip>
 #include <set>
+#include <conio.h>
 #ifndef _WIN32
 #include <termios.h>
 #include <unistd.h>
