@@ -4,6 +4,7 @@
 #include <locale>
 #ifdef _WIN32
 #include <windows.h>
+#include <locale.h>
 #endif
 #include "ui/menu.hpp"
 #include "storage/file_manager.hpp"
@@ -35,6 +36,10 @@ int main(int argc, char* argv[]) {
     // -----------------------------------------------------------------------
     // Parsowanie flag wiersza polecen
     // -----------------------------------------------------------------------
+    system("chcp 65001 > nul");
+    setlocale(LC_ALL, ".UTF8");
+    SetConsoleOutputCP(CP_UTF8);
+    SetConsoleCP(CP_UTF8);
     bool trybStatystyk = false;
     std::string nadpisanyTryb = "";
 

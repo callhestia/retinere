@@ -92,7 +92,7 @@ StatystykiSesji trybWpisywania(vector<Fiszka*>& fiszki, float prog) {
     czyscEkran();
     cout << "=== TRYB WPISYWANIA ===\n";
     cout << "Fiszek do przejrzenia: " << fiszki.size() << "\n";
-    cout << "Wpisuj odpowiedzi — algorytm sam oceni literowki.\n";
+    cout << "Wpisuj odpowiedzi - algorytm sam oceni literowki.\n";
     czekajNaEnter();
 
     auto t0 = chrono::steady_clock::now();

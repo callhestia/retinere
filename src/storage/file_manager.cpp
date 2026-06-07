@@ -8,21 +8,17 @@
 #include "../config.hpp"
 
 using namespace std;
-
+// Globalna zmienna przechowująca ścieżkę do pliku z fiszkami.
 // Runtime-override deck path; nadpisywany przez flage --deck w main.cpp
 string g_sciezkaTalii = PLIK_TALII;
 
+// Funkcja wczytująca wszystkie fiszki z pliku do wektora
 vector<Fiszka> wczytajTalie(){
     vector<Fiszka> deck;
-    std::locale loc;
-    try {
-        loc = std::locale("");
-    } catch (...) {
-        loc = std::locale::classic();
-    }
-
+    std::locale loc; // Obiekt lokalizacji do obsługi specyficznych znaków
+   
     ifstream file;
-    file.imbue(loc);
+    file.imbue(loc); // Przypisanie lokalizacji do strumienia pliku
     file.open(g_sciezkaTalii);
     if (!file.is_open()) {
         ofstream newFile(g_sciezkaTalii);
@@ -59,23 +55,17 @@ vector<Fiszka> wczytajTalie(){
             deck.push_back(card);
         }
         catch(...){
-            continue;
+            continue; // Pominięcie błędnie sformatowanych linii, np. brak pola poziomTrudnosci lub inne problemy z konwersją
         }
     }
     file.close();
     return deck;
 }
 
+// Funkcja zapisująca aktualny stan wektora z powrotem do pliku tekstowego
 void zapiszTalie(const vector<Fiszka>& deck){
-    std::locale loc;
-    try {
-        loc = std::locale("");
-    } catch (...) {
-        loc = std::locale::classic();
-    }
-
+    
     ofstream file;
-    file.imbue(loc);
     file.open(g_sciezkaTalii);
     if(!file.is_open()) return;
     for(const auto& card : deck){
@@ -84,7 +74,9 @@ void zapiszTalie(const vector<Fiszka>& deck){
     file.close();
 }
 
+// Wczytuje główny tryb nauki
 int wczytajKonfiguracje(){
+    // Próba ustawienia domyślnej lokalizacji systemu, jeśli się nie uda - program używa klasycznej lokalizacji (C)
     std::locale loc;
     try {
         loc = std::locale("");
@@ -102,6 +94,7 @@ int wczytajKonfiguracje(){
     return mode;
 }
 
+// Zapisuje wybrane ustawienia (tryb nauki i tryb literówek) do pliku konfiguracyjnego
 void zapiszKonfiguracje(int studyMode, int typoMode) {
     std::locale loc;
     try {
@@ -117,7 +110,7 @@ void zapiszKonfiguracje(int studyMode, int typoMode) {
         file << studyMode << "\n" << typoMode << "\n";
     }
 }
-
+// Wczytuje ustawienie tolerancji na literówki
 int wczytajTrybLiterowek() {
     ifstream file(PLIK_KONFIGURACJI);
     if (!file.is_open()) return TRYB_NORMALNY;
@@ -127,6 +120,7 @@ int wczytajTrybLiterowek() {
     return typoMode;
 }
 
+// Pobiera dane o passie użytkownika
 void wczytajDaneSerii(int& lastDay, int& streak) {
     ifstream file(PLIK_SERII);
     lastDay = 0;
@@ -136,6 +130,7 @@ void wczytajDaneSerii(int& lastDay, int& streak) {
     }
 }
 
+// Zapisuje aktualną passę dni nauki
 void zapiszDaneSerii(int lastDay, int streak) {
     ofstream file(PLIK_SERII);
     if (file.is_open()) {
@@ -143,6 +138,7 @@ void zapiszDaneSerii(int lastDay, int streak) {
     }
 }
 
+// Zrzuca całą talię do pliku tekstowego z nagłówkiem informacyjnym
 bool eksportujTalie(const vector<Fiszka>& deck, const string& path) {
     ofstream file(path);
     if (!file.is_open()) return false;
@@ -152,24 +148,25 @@ bool eksportujTalie(const vector<Fiszka>& deck, const string& path) {
     return true;
 }
 
+// Wczytuje talię z zewnętrznego pliku, zliczając jednocześnie pominięte (błędnie sformatowane) linie
 vector<Fiszka> importujTalie(const string& path, int& skipped) {
     vector<Fiszka> result;
-    skipped = 0;
-    ifstream file(path);
+    skipped = 0; // Licznik pominiętych linii z powodu błędów formatowania
+    ifstream file(path); 
     if (!file.is_open()) { skipped = -1; return result; }
 
     string line;
     while (getline(file, line)) {
         if (line.empty() || line[0] == '#') continue;
-        stringstream ss(line);
+        stringstream ss(line); 
         string q, a, eStr, etykieta;
         if (!getline(ss, q, '|') || q.empty()) { skipped++; continue; }
         if (!getline(ss, a, '|') || a.empty()) { skipped++; continue; }
         Fiszka card;
         card.pytanie = q;
         card.odpowiedz   = a;
-        if (getline(ss, eStr, '|')) {
-            try { card.poziomTrudnosci = stod(eStr); } catch (...) { card.poziomTrudnosci = 2.5; }
+        if (getline(ss, eStr, '|')) { 
+            try { card.poziomTrudnosci = stod(eStr); } catch (...) { card.poziomTrudnosci = 2.5; } // Domyślny poziom trudności, jeśli konwersja się nie powiedzie
         }
         if (getline(ss, etykieta)) card.etykieta = etykieta;
         result.push_back(card);
@@ -177,6 +174,7 @@ vector<Fiszka> importujTalie(const string& path, int& skipped) {
     return result;
 }
 
+// Wczytuje ile fiszek użytkownik zaplanował zrobić w danym dniu
 int wczytajCelDzienny() {
     ifstream file(PLIK_DZIENNY);
     if (!file.is_open()) return DOMYSLNY_CEL_DZIENNY;
@@ -186,6 +184,7 @@ int wczytajCelDzienny() {
     return goal;
 }
 
+// Sprawdza, ile fiszek użytkownik już powtórzył danego dnia
 int wczytajPostepDzienny(int today) {
     ifstream file(PLIK_DZIENNY);
     if (!file.is_open()) return 0;
@@ -194,6 +193,7 @@ int wczytajPostepDzienny(int today) {
     return (lastDay == today) ? count : 0;
 }
 
+// Aktualizuje i zapisuje plik postępów (ile zrobiono dzisiaj)
 void zapiszPostepDzienny(int today, int count) {
     int goal = wczytajCelDzienny();
     ofstream file(PLIK_DZIENNY);
