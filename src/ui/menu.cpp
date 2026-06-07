@@ -202,10 +202,11 @@ StatystykiSesji trybSamooceny(vector<Fiszka*>& fiszki) {
         Fiszka* fp = fiszki[idx];
 
         czyscEkran();
+        cout << endl<< "Aby zamknąć aplikację wpisz 'kill', aby wrócić do menu wpisz 'menu'\n\n[Naciśnij Enter aby kontynuować]\n";
         rysujLinie();
         cout << "PYTANIE: " << fp->pytanie << "\n";
         rysujLinie();
-        cout << endl<< "Aby zamknąć aplikację wpisz 'kill', aby wrócić do menu wpisz 'menu'\n\n[Naciśnij Enter aby kontynuować]\n";
+        
         string cmd = "";
         getline(cin, cmd);
         if (cmd == "kill") { stats.wynik = WynikSesji::ZAKONCZ; return stats; }

@@ -2,6 +2,13 @@
 #include <clocale>
 #include <iostream>
 #include <locale>
+#include <fstream>
+#include <unistd.h>
+#include <limits.h>
+#include <cstring>
+#ifdef __APPLE__
+#include <mach-o/dyld.h>    // _NSGetExecutablePath — absolutna ścieżka do binarki na macOS
+#endif
 #ifdef _WIN32
 #include <windows.h>
 #include <locale.h>
@@ -63,6 +70,61 @@ int main(int argc, char* argv[]) {
     }
 
     ustawLocalePolskie();
+
+    // -----------------------------------------------------------------------
+    // Ustaw katalog roboczy na katalog główny projektu.
+    // To JEDNO działanie naprawia ścieżki WSZYSTKICH plików danych:
+    //   decks/deck.txt, data/config.txt, data/streak.txt, data/daily.txt
+    // Bez tego, uruchamianie binarki z katalogu build/ (lub przez Finder)
+    // powoduje, że wszystkie względne ścieżki prowadzą do złego miejsca.
+    // -----------------------------------------------------------------------
+    {
+        char exePathBuf[PATH_MAX];
+        exePathBuf[0] = '\0';
+
+#if defined(__APPLE__)
+        // Na macOS _NSGetExecutablePath daje absolutną ścieżkę niezależnie od argv[0]
+        uint32_t sz = (uint32_t)sizeof(exePathBuf);
+        _NSGetExecutablePath(exePathBuf, &sz);
+#endif
+        // Fallback: argv[0] — może być względna, ale wystarczy do wyznaczenia katalogu
+        if (exePathBuf[0] == '\0' && argv[0]) {
+            std::strncpy(exePathBuf, argv[0], PATH_MAX - 1);
+            exePathBuf[PATH_MAX - 1] = '\0';
+        }
+
+        if (exePathBuf[0] != '\0') {
+            std::string exePath = exePathBuf;
+
+            // Jeśli ścieżka jest względna, uzupełnij o bieżący katalog
+            if (exePath[0] != '/') {
+                char cwdBuf[PATH_MAX];
+                if (getcwd(cwdBuf, sizeof(cwdBuf)) != nullptr)
+                    exePath = std::string(cwdBuf) + "/" + exePath;
+            }
+
+            // Wyznacz katalog binarki (np. /sciezka/do/retinere/build/)
+            auto sep = exePath.find_last_of('/');
+            if (sep != std::string::npos) {
+                std::string exeDir = exePath.substr(0, sep);
+
+                // Przypadek 1: binarka jest w podkatalogu (np. build/) — katalog projektu jest poziom wyżej
+                std::string candidate = exeDir + "/..";
+                std::ifstream testDecks(candidate + "/decks/deck.txt");
+                if (testDecks.good()) {
+                    chdir(candidate.c_str());
+                } else {
+                    // Przypadek 2: binarka jest bezpośrednio w katalogu projektu
+                    std::ifstream testDecks2(exeDir + "/decks/deck.txt");
+                    if (testDecks2.good()) {
+                        chdir(exeDir.c_str());
+                    }
+                    // Przypadek 3: brak decks/deck.txt nigdzie — zostajemy w bieżącym katalogu
+                }
+            }
+        }
+    }
+
     auto fiszki = wczytajTalie();
 
     if (trybStatystyk) {

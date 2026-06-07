@@ -15,14 +15,14 @@ double zaplanujPowtorke(int ocena, double poprzedniWspolczynnik) {
 
 
 
-    if (wspolczynnik < 1.3) {
+    if (wspolczynnik < 1.3) { // dolny limit wspolczynnika, zeby zapobiec zbyt krotkim przerwom miedzy powtorkami
         wspolczynnik = 1.3;
     }
 
     
-    if (wspolczynnik > 3.5) {
+    if (wspolczynnik > 3.5) { // gorny limit wspolczynnika, zeby zapobiec zbyt dlugim przerwom miedzy powtorkami
         wspolczynnik = 3.5;
     }
 
-    return wspolczynnik;
+    return wspolczynnik; // oba capy wspolczynnika byly zaproponowane w OG SM-2
 }
