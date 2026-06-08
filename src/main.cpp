@@ -3,15 +3,22 @@
 #include <iostream>
 #include <locale>
 #include <fstream>
-#include <unistd.h>
-#include <limits.h>
 #include <cstring>
-#ifdef __APPLE__
-#include <mach-o/dyld.h>    // _NSGetExecutablePath — absolutna ścieżka do binarki na macOS
-#endif
 #ifdef _WIN32
 #include <windows.h>
 #include <locale.h>
+#include <direct.h>
+#ifndef PATH_MAX
+#define PATH_MAX MAX_PATH
+#endif
+#define getcwd _getcwd
+#define chdir  _chdir
+#else
+#include <unistd.h>
+#include <limits.h>
+#endif
+#ifdef __APPLE__
+#include <mach-o/dyld.h>    // _NSGetExecutablePath — absolutna ścieżka do binarki na macOS
 #endif
 #include "ui/menu.hpp"
 #include "storage/file_manager.hpp"
@@ -43,10 +50,12 @@ int main(int argc, char* argv[]) {
     // -----------------------------------------------------------------------
     // Parsowanie flag wiersza polecen
     // -----------------------------------------------------------------------
+#ifdef _WIN32
     system("chcp 65001 > nul");
     setlocale(LC_ALL, ".UTF8");
     SetConsoleOutputCP(CP_UTF8);
     SetConsoleCP(CP_UTF8);
+#endif
     bool trybStatystyk = false;
     std::string nadpisanyTryb = "";
 
@@ -86,6 +95,8 @@ int main(int argc, char* argv[]) {
         // Na macOS _NSGetExecutablePath daje absolutną ścieżkę niezależnie od argv[0]
         uint32_t sz = (uint32_t)sizeof(exePathBuf);
         _NSGetExecutablePath(exePathBuf, &sz);
+#elif defined(_WIN32)
+        GetModuleFileNameA(NULL, exePathBuf, PATH_MAX);
 #endif
         // Fallback: argv[0] — może być względna, ale wystarczy do wyznaczenia katalogu
         if (exePathBuf[0] == '\0' && argv[0]) {
@@ -97,14 +108,14 @@ int main(int argc, char* argv[]) {
             std::string exePath = exePathBuf;
 
             // Jeśli ścieżka jest względna, uzupełnij o bieżący katalog
-            if (exePath[0] != '/') {
+            if (exePath[0] != '/' && !(exePath.size() >= 2 && exePath[1] == ':')) {
                 char cwdBuf[PATH_MAX];
                 if (getcwd(cwdBuf, sizeof(cwdBuf)) != nullptr)
                     exePath = std::string(cwdBuf) + "/" + exePath;
             }
 
             // Wyznacz katalog binarki (np. /sciezka/do/retinere/build/)
-            auto sep = exePath.find_last_of('/');
+            auto sep = exePath.find_last_of("/\\");
             if (sep != std::string::npos) {
                 std::string exeDir = exePath.substr(0, sep);
 
