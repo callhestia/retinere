@@ -182,12 +182,12 @@ StatystykiSesji trybSamooceny(vector<Fiszka*>& fiszki) {
     cout << "=== TRYB SAMOOCENY ===\n";
     cout << "Fiszek do przejrzenia: " << fiszki.size() << "\n\n";
     cout << "Skala ocen:\n";
-    cout << "  5 - Odpowiedzialem idealnie\n";
-    cout << "  4 - Drobna literowka\n";
-    cout << "  3 - Poprawna odpowiedz, ale z wahaniem\n";
-    cout << "  2 - Zla odpowiedz, ale przypomnialo mi sie\n";
-    cout << "  1 - Bardzo slaba odpowiedz\n";
-    cout << "  0 - Zupelnie nie wiedzialem\n";
+    cout << "  5 - Najlepiej\n";
+    cout << "  4 - \n";
+    cout << "  3 - \n";
+    cout << "  2 - \n";
+    cout << "  1 - \n";
+    cout << "  0 - Najgorzej\n";
     czekajNaEnter();
 
     // Wagi: każda fiszka startuje z 1.0
@@ -203,10 +203,10 @@ StatystykiSesji trybSamooceny(vector<Fiszka*>& fiszki) {
         Fiszka* fp = fiszki[idx];
 
         czyscEkran();
-        cout << endl<< "Aby zamknąć aplikację wpisz 'kill', aby wrócić do menu wpisz 'menu'\n\n[Naciśnij Enter aby kontynuować]\n";
         rysujLinie();
         cout << "PYTANIE: " << fp->pytanie << "\n";
         rysujLinie();
+        cout << endl<< "[Naciśnij Enter aby kontynuować]\n";
         
         string cmd = "";
         getline(cin, cmd);

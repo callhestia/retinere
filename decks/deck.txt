@@ -1,31 +1,66 @@
-Co oznacza skrot SQL?|Structured Query Language|2|Bazy Danych
-Jaki klucz jednoznacznie identyfikuje wiersz w tabeli?|Klucz glowny (Primary Key)|2|Bazy Danych
-Jak usunac cala strukture tabeli wraz z danymi?|DROP TABLE|2|SQL
-Do jakiej grupy polecen z rodziny SQL nalezy instrukcja SELECT?|DQL (Data Query Language) lub ogolnie DML|2|SQL
-Co robi funkcja COUNT()?|Zwraca liczbe wierszy spelniajacych okreslone kryterium|2|SQL
-Rozwin skrot ACID w kontekscie transakcji bazodanowych|Atomicity, Consistency, Isolation, Durability|2|Bazy Danych
-Jaka jest glowna roznica miedzy instrukcjami DELETE a TRUNCATE?|TRUNCATE to szybsze DDL nie logujace usuwania pojedynczych wierszy, DELETE to DML logujace kazdy usuniety wiersz|2|SQL
-Do czego sluzy klauzula GROUP BY?|Do grupowania wierszy o tych samych wartosciach, najczesciej uzywana z funkcjami agregujacymi|2|SQL
-Jakie polecenie sluzy do modyfikacji istniejacych danych w tabeli?|UPDATE|2|SQL
-Ktory rodzaj zlaczenia zwraca wylacznie wiersze majace dopasowanie w obu laczonych tabelach?|INNER JOIN|2|SQL
-Czym jest indeks w relacyjnej bazie danych?|Struktura danych przyspieszajaca operacje wyszukiwania kosztem wolniejszego wstawiania i aktualizacji|2|Bazy Danych
-Jakiej komendy uzyjesz, aby dodac nowa kolumne do istniejacej juz tabeli?|ALTER TABLE|2|SQL
-Do jakiej grupy polecen naleza GRANT i REVOKE?|DCL (Data Control Language)|2|SQL
-Czym rozni sie LEFT JOIN od INNER JOIN?|LEFT JOIN zwraca wszystkie wiersze z lewej tabeli, nawet jesli nie maja dopasowania w prawej|2|SQL
-Co robi klauzula HAVING i czym rozni sie od WHERE?|Filtruje dane po grupowaniu (GROUP BY), podczas gdy WHERE filtruje pojedyncze wiersze przed grupowaniem|2|SQL
-Jak wylistowac pliki i katalogi?|ls|2|Linux
-Jak zmienic biezacy katalog?|cd|2|Linux
-Jak wyswietlic pelna sciezke obecnego katalogu?|pwd|2|Linux
-Jak utworzyc nowy, pusty plik?|touch|2|Linux
-Jak utworzyc nowy katalog?|mkdir|2|Linux
-Jak skopiowac plik lub katalog?|cp|2|Linux
-Jak przeniesc lub zmienic nazwe pliku?|mv|2|Linux
-Jak usunac plik?|rm|2|Linux
-Jak usunac pusty katalog?|rmdir|2|Linux
-Jak wyswietlic zawartosc pliku w konsoli?|cat|2|Linux
-Jak wyszukac ciag znakow wewnatrz pliku?|grep|2|Linux
-Jak wyswietlic instrukcje obslugi danego polecenia?|man|2|Linux
-Jak sprawdzic aktualne zuzycie pamieci RAM?|free -h|2|Linux
-Jak wyswietlic liste uruchomionych procesow w czasie rzeczywistym?|top|2|Linux
-Jakie polecenie pozwala wykonac komende z uprawnieniami administratora?|sudo|2|Linux
-Testuje, odpowiedz: 5|5|2.2|Test
+Jak działa sygnatura int obliczStatusOdpowiedzi(const string& odpowiedz, const Fiszka& fiszka, float prog)? Po co użyto const oraz &?|Znak & oznacza przekazanie przez referencję (brak zasobożernej kopii). Słowo const gwarantuje brak modyfikacji danych. Funkcja zwraca 0, 1 lub 2.|2|C++
+W jaki sposób w funkcji przeliczBladNaOcene obliczany jest wspolczynnikBledu i po co użyto static_cast?|Zmienne odleglosc i maxDlugosc to inty. Rzutowanie static_cast wymusza dokładne dzielenie ułamkowe zamiast ucinania wyniku do zera.|2|C++
+Co oznacza słowo kluczowe static przed funkcjami w pliku engine.cpp?|Oznacza tzw. internal linkage. Funkcje te są widoczne tylko w tym konkretnym pliku, co zapobiega konfliktom nazw podczas łączenia z resztą programu.|2|C++
+Jak w funkcji wybierzNastepna działa mechanizm losowania z użyciem mt19937 i std::random_device?|mt19937 to zaawansowany generator, a random_device daje unikalne ziarno startowe. Słowo static sprawia, że mechanizm inicjalizuje się tylko raz w całym cyklu życia programu.|2|C++
+Na czym polega algorytm koła ruletki w funkcji wybierzNastepna?|Losowany jest ułamek z puli wszystkich wag. Pętla sumuje wagi fiszek w czasie rzeczywistym – gdy suma przewyższy wylosowaną liczbę, zwracany jest indeks (im trudniejsza fiszka, tym łatwiej w nią trafić).|2|C++
+Co robi linia: vector<vector> tabela(dlugoscA + 1, vector(dlugoscB + 1, 0)) w pliku Levenshtein.cpp?|Tworzy dwuwymiarową macierz. Zewnętrzny wektor to wiersze, a wewnętrzny to kolumny startujące od wartości 0. Element +1 robi wolne miejsce na analizę pustych ciągów znaków.|2|C++
+Czym są operacje usun, wstaw, zamien w algorytmie Levenshteina i co robi instrukcja min()?|To warianty kosztu modyfikacji fragmentu słowa. Funkcja min() wybiera z podanej listy najmniejszą wartość pochodzącą z sąsiadujących komórek w tabeli.|2|C++
+Jak algorytm SM-2 we wzorze na współczynnik przerwy reaguje na otrzymane oceny w sm2.cpp?|Dla oceny 5 dodaje +0.1 rozsuwając powtórki w czasie. Dla niższych ocen wynik ze wzoru jest ujemny, wymuszając na systemie częstsze wywoływanie danej fiszki.|2|C++
+Po co w algorytmie SM-2 zastosowano sztywne limity współczynnika < 1.3 i > 3.5?|Dolny próg 1.3 zapobiega paradoksowi skracania czasu między powtórkami mimo nauki. Górny próg 3.5 blokuje odkładanie powtórek na wiele lat po serii idealnych trafień.|2|C++
+Jaką rolę pełnią pliki nagłówkowe (.hpp) i dyrektywa #pragma once?|Są zbiorem deklaracji struktur i funkcji ("mapą" dla reszty plików). #pragma once zmusza kompilator do załączenia pliku tylko raz, unikając błędów podwójnej definicji.|2|C++
+Do czego służy funkcja obliczNowaWage i przed czym chroni?|Zapobiega "monopolowi" trudnych fiszek. Oblicza średnią wagę aktywnych fiszek i nie pozwala, aby waga nowej fiszki wzrosła powyżej trzykrotności tej średniej.|2|C++
+Jak funkcja krokNauki obsługuje tryb ręczny i automatyczny?|W ręcznym przyjmuje ocenę od użytkownika (z ucięciem do bezpiecznej skali 0-5). W automatycznym ignoruje ręczną ocenę i sama ją wylicza z odpowiedzi za pomocą algorytmu Levenshteina.|2|C++
+Jak działa logika akceptacji błędu w funkcji czyBladDopuszczalny?|Dzieli wyliczony dystans Levenshteina przez długość dłuższego ze słów. Jeśli uzyskany ułamek jest mniejszy lub równy progowi tolerancji (float prog), zwraca wartość prawda (true).|2|C++
+Co oznacza zapis float prog = LEVENSHTEIN_PROG w deklaracji w pliku Levenshtein.hpp?|To argument domyślny. Jeśli przy wywołaniu funkcji programista w ogóle nie poda tej zmiennej, kompilator w to miejsce automatycznie wstawi stałą wartość LEVENSHTEIN_PROG.|2|C++
+Dlaczego w pętlach użyto zapisu np. for (double w : wagi) zamiast klasycznej iteracji po indeksach np. wagi[i]?|To nowoczesna pętla range-based for wprowadzona w C++11. Zwiększa czytelność i chroni przed wyjściem poza zakres tablicy (Out of Bounds), bezpiecznie przelatując przez każdy element wektora.|2|C++
+W jaki sposób funkcja wybierzNastepna stara się nie wylosować dwa razy z rzędu tej samej fiszki?|Przyjmuje parametr poprzedniIndeks. Odemuje wagę poprzednika od sumy wylosowanej z ruletki, a podczas głównej pętli używa instrukcji continue, aby pominąć sprawdzanie poprzedniego indeksu.|2|C++
+Jak zoptymalizowano funkcję obliczOdleglosc na wypadek otrzymania zupełnie pustych ciągów znaków?|Na początku funkcji zastosowano wczesny powrót (early return). Jeśli długość pierwszego słowa to 0, od razu zwraca długość drugiego słowa (i vice versa), całkowicie oszczędzając czas procesora na tworzenie macierzy.|2|C++
+Do czego użyto biblioteki  podłączonej przez #include na górze pliku?|Dostarcza gotowe i zoptymalizowane funkcje ze Standardowej Biblioteki Szablonów (STL). Użyto z niej funkcji max() do znajdowania dłuższego słowa oraz min() do jednoczesnego porównania trzech kosztów w Levenshteinie.|2|C++
+Czym jest parametr TrybNauki tryb w funkcji krokNauki i dlaczego to dobra praktyka?|Zdefiniowany wcześniej typ wyliczeniowy (enum / enum class). Kod przyjmie tylko narzucone tam wartości (np. TrybNauki::RECZNY). Jest to bezpieczniejsze na etapie kompilacji i czytelniejsze niż operowanie na tzw. magicznych liczbach (np. przekazywanie zwykłego int 0 lub 1).|2|C++
+Dlaczego w algorytmie przeliczBladNaOcene użyto "drabinki" instrukcji if, a nie instrukcji switch?|Ponieważ zmienna wspolczynnikBledu przechowuje ułamki (double). W języku C++ instrukcja switch potrafi porównywać i działać wyłącznie na wartościach całkowitoliczbowych (int, char, enum). Dla ułamków lub przedziałów pozostaje if-else.|2|C++
+Prawidłowa kolejność działań prowadzących do wdrożenia systemu bazodanowego to:|Analiza wymagań, model konceptualny, model implementacyjny, implementacja, wdrożenie|2|BD
+Czy diagramy ER pozwalają w sposób graficzny przedstawiać model konceptualny?|TAK|2|BD
+Czy związki zachodzące pomiędzy zbiorami encji mogą być więcej niż dwuargumentowe?|TAK|2|BD
+Czy związki zachodzące pomiędzy zbiorami encji mogą posiadać atrybuty?|TAK|2|BD
+Czy związki mogą zachodzić pomiędzy encjami należącymi do jednego zbioru?|TAK|2|BD
+W modelu ER zdanie "Każdy zawodnik posiada wagę i wzrost" będzie prawidłowo zmodelowane za pomocą:|Jednej encji i dwóch atrybutów|2|BD
+W notacji Chena związki w diagramie ER reprezentowane są za pomocą:|Rombów|2|BD
+W notacji Chena atrybuty w diagramie ER reprezentowane są za pomocą:|Elips|2|BD
+Obowiązkowe powiązanie o krotności jeden oznacza się w notacji Chena za pomocą:|Cyfry 1|2|BD
+W przypadku konwersji struktur ISA do modelu relacyjnego zgodnie z ogólnym podejściem obiektowym, jeżeli mamy jedną nadklasę i dwie podklasy w związku ISA, to:|Zostaną utworzone 3 tabele|2|BD
+Który z wymienionych sposobów nie jest metodą konwersji struktur podklas do modelu relacyjnego:|Dla każdego zbioru encji tworzymy relację, a puste atrybuty będą miały wartość NULL|2|BD
+Klucz główny słabego zbioru encji składa się:|Z atrybutów własnych w połączeniu z atrybutami kluczowymi encji połączonej|2|BD
+Odpowiednikiem zbioru encji w modelu obiektowym jest:|Klasa|2|BD
+Odpowiednikiem związku ISA w modelowaniu obiektowym jest:|Związek dziedziczenia|2|BD
+Do uniwersalnego, niezależnego od implementacji opisu obiektów w modelu konceptualnym można stosować:|UML|2|BD
+Kolejność krotek w relacji:|Nie ma znaczenia (odpowiedź z pliku: odpowiada kolejności atrybutów)|2|BD
+W przypadku unii dwóch relacji:|Schematy oby relacji muszą posiadać te same atrybuty|2|BD
+W przypadku iloczynu kartezjańskiego relacji R1(A,B) i R2(B,C) otrzymamy relację:|O czterech atrybutach|2|BD
+Klucz to:|Minimalny zestaw atrybutów jednoznacznie identyfikujący każdą krotkę w relacji|2|BD
+Zbiór lub podzbiór atrybutów relacji takich, że nie istnieją dwa takie krotki, w których atrybuty te przyjmują takie same wartości to:|Klucz|2|BD
+Atrybut należący do jakiegokolwiek klucza to:|Atrybut podstawowy|2|BD
+Zależność funkcyjna:|Opisuje zależność pomiędzy atrybutami w obrębie pojedynczej relacji|2|BD
+Mamy relację R(A, B, C, D, E, F) z zależnościami AB -> C, BC -> AD, DE -> F, CF -> B. Kluczem relacji R jest:|BCE|2|BD
+Dana jest relacji R(A, B, C, D, E) z zależnościami B -> B i CE -> A. Nadkluczem tej relacji jest:|ACDE|2|BD
+Mamy relację R(A, B, C, D, E, F) z zależnościami AB -> C, BC -> AD, DE -> F, CF -> B. Domknięcie {AB}* jest równe:|{A,B,C,D}|2|BD
+Mamy relację R(A, B, C, D). Zależność funkcyjna ABC -> AB:|Jest trywialna|2|BD
+Brak przechodnich zależności funkcyjnych jest warunkiem, który musi spełniać relacja, aby znaleźć się w:|3NF|2|BD
+Warunek "Żaden atrybut wtórny relacji nie jest częściowo zależny od klucza" jest warunkiem, który musi spełnić relacja, aby znaleźć się w:|2NF|2|BD
+Czy z tego, że relacja jest w 3NF wynika, że jest w 2NF:|Tak|2|BD
+Czy z tego, że relacja jest BCNF wynika, że jest w 3NF:|Tak|2|BD
+Czy relacja R(A, B) jest w BCNF:|Tak|2|BD
+W przypadku, gdy dla każdej zależności funkcyjnej A -> B występującej w pewnej relacji B jest atrybutem, podstawowym, relacja jest na pewno w:|3NF|2|BD
+Co musi się znajdować po lewej stronie każdej nietrywialnej wielowartościowej zależności funkcyjnej w relacji, aby była ona w czwartej postaci normalnej:|Klucz kandydujący|2|BD
+Do wyświetlania danych z tabeli w SQL stosujemy polecenie:|SELECT|2|BD
+Jakie polecenie SQL odpowiada złączeniu Teta:|JOIN ON|2|BD
+W SQL jaki jest symbol podobieństwa do wzorca:|%|2|BD
+W SQL jaka jest funkcja agregująca działająca na całą kolumnę?|COUNT|2|BD
+W SQL polecenie, które odpowiada za wyświetlenie wszystkich atrybutów:|*|2|BD
+W SQL jak zapisać warunek do polecenia:|WHERE|2|BD
+Czy podzapytania mogą wyświetlać pojedyncze:|Tak|2|BD
+Czy podzapytania mogą wyświetlać duplikaty:|Tak|2|BD
+Czy indeks zmienia kolejność:|Nie|2|BD
+Czy może istnieć kilka indeksów do jednego pliku?|Tak|2|BD
+Czy jeden indeks może się odnosić do kilku atrybutów:|Tak|2|BD
+Definicja ACID:|Atomicity, Consistency, Isolation i Durability|2|BD
+Jak zorganizowana jest pamięć masowa:|W pliki, które przechowywane są w blokach dyskowych (stronach)|2|BD

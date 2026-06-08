@@ -1,5 +1,4 @@
 build/
-*.exe
 *.o
 *.d
 .DS_Store
