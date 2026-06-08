@@ -4,9 +4,9 @@
 #include <string>
 #include <vector>
 #include <locale>
+#include <filesystem>
 #include "file_manager.hpp"
 #include "../config.hpp"
-#include <limits.h>
 #include <cstring>
 #include <cstdlib>
 #ifdef __APPLE__
@@ -14,6 +14,14 @@
 #endif
 #ifdef __linux__
 #include <unistd.h>
+#include <limits.h>
+#endif
+#ifdef _WIN32
+#include <windows.h>
+#include <direct.h>
+#ifndef PATH_MAX
+#define PATH_MAX MAX_PATH
+#endif
 #endif
 
 using namespace std;
@@ -53,7 +61,7 @@ vector<Fiszka> wczytajTalie(){
         ssize_t len = readlink("/proc/self/exe", exePathBuf, sizeof(exePathBuf) - 1);
         if (len != -1) exePathBuf[len] = '\0';
 #elif defined(_WIN32)
-        // Windows: leave exePathBuf empty (we'll rely on cwd)
+        GetModuleFileNameA(NULL, exePathBuf, PATH_MAX);
 #endif
         std::string exeDir;
         if (exePathBuf[0] != '\0') {
@@ -68,8 +76,9 @@ vector<Fiszka> wczytajTalie(){
         }
 
         bool found = false;
+        std::string pathToOpen = g_sciezkaTalii;
         for (const auto &cand : candidates) {
-            if (file_exists(cand)) {
+            if (std::filesystem::exists(cand)) {
                 pathToOpen = cand;
                 file.open(pathToOpen);
                 if (file.is_open()) { found = true; break; }
