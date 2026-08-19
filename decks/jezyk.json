@@ -1,0 +1,641 @@
+{
+  "name": "Język Polski",
+  "cards": [
+    {
+      "pytanie": "Co to jest znak typu indeks?",
+      "odpowiedz": "Znak oparty na obiektywnym związku przyczynowo-skutkowym między formą a treścią (np. dym oznacza ogień, gorączka oznacza chorobę).",
+      "poziomTrudnosci": 1.3,
+      "etykieta": "Semiotyka"
+    },
+    {
+      "pytanie": "Co to jest znak typu ikona?",
+      "odpowiedz": "Znak oparty na fizycznym, wizualnym lub dźwiękowym podobieństwie do oznaczanego obiektu (np. portret, mapa, piktogram).",
+      "poziomTrudnosci": 1.3,
+      "etykieta": "Semiotyka"
+    },
+    {
+      "pytanie": "Co to jest znak typu symbol?",
+      "odpowiedz": "Znak oparty wyłącznie na arbitralnej umowie społecznej i konwencji. Nie ma naturalnego związku z oznaczanym obiektem (np. flaga, słowa w języku).",
+      "poziomTrudnosci": 1.3,
+      "etykieta": "Semiotyka"
+    },
+    {
+      "pytanie": "Czym zajmuje się semiotyka?",
+      "odpowiedz": "Semiotyka to ogólna nauka zajmująca się badaniem wszystkich systemów znakowych (np. znaków drogowych, kodu Morse'a, języka).",
+      "poziomTrudnosci": 2,
+      "etykieta": "Semiotyka"
+    },
+    {
+      "pytanie": "Czym różni się językoznawstwo od semiotyki?",
+      "odpowiedz": "Językoznawstwo to węższa dziedzina (część semiotyki), która zajmuje się badaniem wyłącznie jednego systemu znakowego – języka naturalnego.",
+      "poziomTrudnosci": 2,
+      "etykieta": "Wstęp do językoznawstwa"
+    },
+    {
+      "pytanie": "Czym zajmuje się językoznawstwo (lingwistyka)?",
+      "odpowiedz": "Bada język naturalny jako system znaków: jego wewnętrzną strukturę, rozwój historyczny, zróżnicowanie terytorialne i funkcjonowanie w społeczeństwie.",
+      "poziomTrudnosci": 2,
+      "etykieta": "Wstęp do językoznawstwa"
+    },
+    {
+      "pytanie": "Czym zajmuje się fonetyka?",
+      "odpowiedz": "Bada fizyczną, dźwiękową stronę języka, czyli sposób artykulacji i właściwości akustyczne głosek.",
+      "poziomTrudnosci": 2,
+      "etykieta": "Fonetyka"
+    },
+    {
+      "pytanie": "Czym zajmuje się fonologia?",
+      "odpowiedz": "Bada abstrakcyjny system dźwiękowy języka, zajmując się fonemami i ich funkcją odróżniającą znaczenie.",
+      "poziomTrudnosci": 2,
+      "etykieta": "Fonologia"
+    },
+    {
+      "pytanie": "Czym zajmuje się morfologia?",
+      "odpowiedz": "Bada wewnętrzną budowę wyrazów. Dzieli się na fleksję (odmianę) i słowotwórstwo (tworzenie nowych słów).",
+      "poziomTrudnosci": 2,
+      "etykieta": "Morfologia"
+    },
+    {
+      "pytanie": "Czym zajmuje się składnia (syntaksa)?",
+      "odpowiedz": "Zajmuje się budową wypowiedzeń (zdań) oraz regułami łączenia wyrazów i relacjami między nimi w zdaniu.",
+      "poziomTrudnosci": 2,
+      "etykieta": "Składnia"
+    },
+    {
+      "pytanie": "Czym zajmuje się semantyka?",
+      "odpowiedz": "Bada znaczenie znaków językowych (wyrazów, zdań) oraz relacje znaczeniowe między nimi.",
+      "poziomTrudnosci": 2,
+      "etykieta": "Semantyka"
+    },
+    {
+      "pytanie": "Czym zajmuje się leksykologia?",
+      "odpowiedz": "Jest to nauka o zasobie słownictwa danego języka, badająca m.in. pochodzenie słów i ich uwarunkowania społeczne.",
+      "poziomTrudnosci": 2,
+      "etykieta": "Leksykologia"
+    },
+    {
+      "pytanie": "Czym jest podejście synchroniczne w językoznawstwie?",
+      "odpowiedz": "To badanie systemu językowego w jednym, konkretnym momencie czasu, bez uwzględniania jego historii i zmian w czasie.",
+      "poziomTrudnosci": 2,
+      "etykieta": "Metodologia"
+    },
+    {
+      "pytanie": "Czym zajmuje się językoznawstwo opisowe?",
+      "odpowiedz": "Wykorzystuje podejście synchroniczne; skupia się na stworzeniu dokładnego opisu aktualnie obowiązujących reguł gramatycznych i leksykalnych danego stanu języka.",
+      "poziomTrudnosci": 2,
+      "etykieta": "Metodologia"
+    },
+    {
+      "pytanie": "Co to jest język naturalny?",
+      "odpowiedz": "System znaków dźwiękowych, który wykształcił się historycznie w społeczeństwie, służący do uniwersalnej komunikacji i wyrażania dowolnej myśli.",
+      "poziomTrudnosci": 2,
+      "etykieta": "Wstęp do językoznawstwa"
+    },
+    {
+      "pytanie": "Na czym polega dwuklasowość języka naturalnego?",
+      "odpowiedz": "Język zbudowany jest z dwóch poziomów: elementów niemających znaczenia (fonemów/głosek), które łączą się w elementy posiadające znaczenie (morfemy/wyrazy).",
+      "poziomTrudnosci": 2,
+      "etykieta": "Wstęp do językoznawstwa"
+    },
+    {
+      "pytanie": "Na czym polega funkcja metajęzykowa?",
+      "odpowiedz": "Zdolność języka naturalnego do mówienia i opisywania samego siebie (np. używanie języka do tworzenia definicji słownikowych).",
+      "poziomTrudnosci": 2,
+      "etykieta": "Funkcje języka"
+    },
+    {
+      "pytanie": "Na czym polega funkcja komunikatywna języka?",
+      "odpowiedz": "Polega na przekazywaniu informacji, myśli, intencji i uczuć między nadawcą a odbiorcą.",
+      "poziomTrudnosci": 2,
+      "etykieta": "Funkcje języka"
+    },
+    {
+      "pytanie": "Na czym polega funkcja poznawcza (generatywna) języka?",
+      "odpowiedz": "Umożliwia ujmowanie, kategoryzowanie rzeczywistości oraz tworzenie nowych pojęć i abstrakcyjnego myślenia.",
+      "poziomTrudnosci": 2,
+      "etykieta": "Funkcje języka"
+    },
+    {
+      "pytanie": "Z ilu stron składa się znak językowy wg F. de Saussure'a?",
+      "odpowiedz": "Jest dwustronny i w pełni psychiczny. Składa się z elementu oznaczającego (signifiant) i oznaczanego (signifié).",
+      "poziomTrudnosci": 2,
+      "etykieta": "Semiotyka"
+    },
+    {
+      "pytanie": "Czym jest 'signifiant' wg de Saussure'a?",
+      "odpowiedz": "To element oznaczający – wyobrażenie akustyczne, obraz dźwiękowy (forma) w naszym umyśle.",
+      "poziomTrudnosci": 2,
+      "etykieta": "Semiotyka"
+    },
+    {
+      "pytanie": "Czym jest 'signifié' wg de Saussure'a?",
+      "odpowiedz": "To element oznaczany – pojęcie, koncept (znaczenie), które jest powiązane z obrazem dźwiękowym.",
+      "poziomTrudnosci": 2,
+      "etykieta": "Semiotyka"
+    },
+    {
+      "pytanie": "Jaka jest relacja między signifiant a signifié?",
+      "odpowiedz": "Relacja ta jest nierozerwalna (jak dwie strony kartki) oraz arbitralna (całkowicie umowna).",
+      "poziomTrudnosci": 2,
+      "etykieta": "Semiotyka"
+    },
+    {
+      "pytanie": "Co to jest cecha dystynktywna?",
+      "odpowiedz": "Najmniejsza cecha artykulacyjna lub akustyczna, która pozwala odróżnić od siebie dwa fonemy (np. dźwięczność).",
+      "poziomTrudnosci": 2,
+      "etykieta": "Fonologia"
+    },
+    {
+      "pytanie": "Co to jest opozycja fonologiczna?",
+      "odpowiedz": "Relacja przeciwstawienia między dwoma fonemami, które różnią się od siebie co najmniej jedną cechą dystynktywną (np. /p/ - /b/).",
+      "poziomTrudnosci": 2,
+      "etykieta": "Fonologia"
+    },
+    {
+      "pytanie": "Co powoduje zamiana elementów w opozycji fonologicznej?",
+      "odpowiedz": "Prowadzi do zmiany znaczenia wyrazu (np. 'tom' po zamianie /t/ na /d/ staje się 'dom').",
+      "poziomTrudnosci": 2,
+      "etykieta": "Fonologia"
+    },
+    {
+      "pytanie": "Jakie trzy elementy tworzą trójkąt semiotyczny (Ogdena i Richardsa)?",
+      "odpowiedz": "Znak (słowo/forma), Pojęcie (myśl/idea w umyśle) oraz Desygnat (konkretny obiekt w rzeczywistości).",
+      "poziomTrudnosci": 2,
+      "etykieta": "Semiotyka"
+    },
+    {
+      "pytanie": "Jaka jest relacja między znakiem a pojęciem w trójkącie semiotycznym?",
+      "odpowiedz": "Relacja jest bezpośrednia – znak odwołuje się wprost do pojęcia w umyśle.",
+      "poziomTrudnosci": 2,
+      "etykieta": "Semiotyka"
+    },
+    {
+      "pytanie": "Jaka jest relacja między znakiem a desygnatem w trójkącie semiotycznym?",
+      "odpowiedz": "Jest wyłącznie pośrednia i umowna – znak odnosi się do desygnatu tylko poprzez pryzmat pojęcia.",
+      "poziomTrudnosci": 2,
+      "etykieta": "Semiotyka"
+    },
+    {
+      "pytanie": "Jakie są 3 cechy języka jako systemu (wg de Saussure'a)?",
+      "odpowiedz": "Jest społeczny (wspólny dla grupy), abstrakcyjny (zbiór reguł w umyśle) i potencjalny (gotowy do użycia).",
+      "poziomTrudnosci": 2,
+      "etykieta": "Wstęp do językoznawstwa"
+    },
+    {
+      "pytanie": "Jakie są 3 cechy realizacji języka (mowy/tekstu)?",
+      "odpowiedz": "Jest indywidualna (zależna od mówiącego), konkretna (fizyczny dźwięk/zapis) oraz aktualna (jednorazowy akt).",
+      "poziomTrudnosci": 2,
+      "etykieta": "Wstęp do językoznawstwa"
+    },
+    {
+      "pytanie": "Co to jest głoska?",
+      "odpowiedz": "Najmniejszy, słyszalny i wymawialny element mowy; fizyczna, konkretna realizacja dźwięku (badana przez fonetykę).",
+      "poziomTrudnosci": 2,
+      "etykieta": "Fonetyka"
+    },
+    {
+      "pytanie": "Co to jest fonem?",
+      "odpowiedz": "Najmniejsza, abstrakcyjna jednostka systemu dźwiękowego; nie ma znaczenia, ale pełni funkcję odróżniającą znaczenia wyrazów (badana przez fonologię).",
+      "poziomTrudnosci": 2,
+      "etykieta": "Fonologia"
+    },
+    {
+      "pytanie": "Jaka jest relacja fonemu do głoski?",
+      "odpowiedz": "Jeden fonem (byt abstrakcyjny) może być realizowany w mowie przez różne głoski, nazywane jego wariantami pozycyjnymi.",
+      "poziomTrudnosci": 2,
+      "etykieta": "Fonologia"
+    },
+    {
+      "pytanie": "Czym jest człon nacechowany w opozycji fonologicznej?",
+      "odpowiedz": "To ten element w parze, który posiada pozytywną cechę dystynktywną (np. drganie wiązadeł głosowych), której brakuje drugiemu członowi.",
+      "poziomTrudnosci": 2,
+      "etykieta": "Fonologia"
+    },
+    {
+      "pytanie": "Podaj przykład członu nacechowanego i nienacechowanego.",
+      "odpowiedz": "W parze /d/ i /t/, członem nacechowanym jest dźwięczne /d/, a nienacechowanym (pozbawionym dźwięczności) jest /t/.",
+      "poziomTrudnosci": 2,
+      "etykieta": "Fonologia"
+    },
+    {
+      "pytanie": "Co to jest morfem?",
+      "odpowiedz": "Najmniejsza, niepodzielna część wyrazu posiadająca własne znaczenie (leksykalne lub gramatyczne).",
+      "poziomTrudnosci": 2,
+      "etykieta": "Morfologia"
+    },
+    {
+      "pytanie": "Do czego służą morfemy fleksyjne?",
+      "odpowiedz": "Służą do tworzenia form gramatycznych tego samego wyrazu (np. zmiana przypadka) i nie zmieniają jego przynależności do części mowy.",
+      "poziomTrudnosci": 2,
+      "etykieta": "Morfologia"
+    },
+    {
+      "pytanie": "Do czego służą morfemy słowotwórcze?",
+      "odpowiedz": "Służą do tworzenia zupełnie nowych wyrazów od już istniejących; często zmieniają ich część mowy i znaczenie słownikowe.",
+      "poziomTrudnosci": 2,
+      "etykieta": "Morfologia"
+    },
+    {
+      "pytanie": "Dlaczego język polski uznaje się za system spółgłoskowy?",
+      "odpowiedz": "Spółgłoski stanowią większość inwentarza fonologicznego, są głównym nośnikiem informacji i różnicują najwięcej znaczeń.",
+      "poziomTrudnosci": 2,
+      "etykieta": "Fonologia"
+    },
+    {
+      "pytanie": "Jaka jest cecha charakterystyczna polszczyzny w kontekście spółgłosek?",
+      "odpowiedz": "Polszczyzna pozwala na tworzenie dużych, skomplikowanych zbitków spółgłoskowych (np. w wyrazie 'źdźbło'), co jest rzadkie w wielu innych językach.",
+      "poziomTrudnosci": 2,
+      "etykieta": "Fonologia"
+    },
+    {
+      "pytanie": "Czym są cechy prozodyczne (suprasegmentalne)?",
+      "odpowiedz": "To zjawiska fonetyczne obejmujące jednostki większe niż głoski (sylaby, wyrazy, zdania), nakładające się na ciąg dźwięków.",
+      "poziomTrudnosci": 2,
+      "etykieta": "Fonologia"
+    },
+    {
+      "pytanie": "Czym jest akcent (cecha prozodyczna)?",
+      "odpowiedz": "Wyróżnienie konkretnej sylaby w wyrazie poprzez użycie większej siły, wyższego tonu lub dłuższego czasu trwania.",
+      "poziomTrudnosci": 2,
+      "etykieta": "Fonetyka"
+    },
+    {
+      "pytanie": "Czym jest intonacja?",
+      "odpowiedz": "Zmiana wysokości tonu w czasie trwania wypowiedzi; pełni m.in. funkcję komunikacyjną (odróżnia zdanie oznajmujące od pytającego).",
+      "poziomTrudnosci": 2,
+      "etykieta": "Fonetyka"
+    },
+    {
+      "pytanie": "Czym jest iloczas?",
+      "odpowiedz": "Względny czas trwania poszczególnych dźwięków mowy (w niektórych językach zmiana długości samogłoski zmienia znaczenie słowa).",
+      "poziomTrudnosci": 2,
+      "etykieta": "Fonetyka"
+    },
+    {
+      "pytanie": "Czym dokładnie zajmuje się fleksja?",
+      "odpowiedz": "Bada odmianę wyrazów: system form gramatycznych (deklinację, koniugację) oraz reguły łączenia tematów z końcówkami.",
+      "poziomTrudnosci": 2,
+      "etykieta": "Fleksja"
+    },
+    {
+      "pytanie": "Co to są oboczności (badane we fleksji)?",
+      "odpowiedz": "To historyczne zmiany fonetyczne (wymiany głosek) zachodzące w temacie wyrazu podczas jego odmiany (np. róg -> rogu; g:gi).",
+      "poziomTrudnosci": 2,
+      "etykieta": "Fleksja"
+    },
+    {
+      "pytanie": "Przez co odmienia się rzeczownik?",
+      "odpowiedz": "Przez przypadki (7 przypadków w deklinacji polskiej) oraz przez liczby (pojedyncza i mnoga).",
+      "poziomTrudnosci": 2,
+      "etykieta": "Fleksja"
+    },
+    {
+      "pytanie": "Przez co NIE odmienia się rzeczownik?",
+      "odpowiedz": "Przez rodzaje. Rzeczownik ma stały, z góry przypisany rodzaj gramatyczny (męski, żeński lub nijaki).",
+      "poziomTrudnosci": 2,
+      "etykieta": "Fleksja"
+    },
+    {
+      "pytanie": "Przez co odmienia się przymiotnik?",
+      "odpowiedz": "Odmienia się przez przypadki, liczby oraz rodzaje.",
+      "poziomTrudnosci": 2,
+      "etykieta": "Fleksja"
+    },
+    {
+      "pytanie": "Od czego zależy forma gramatyczna przymiotnika w zdaniu?",
+      "odpowiedz": "Od rzeczownika, z którym się łączy. Przymiotnik dostosowuje swój przypadek, liczbę i rodzaj do określanego rzeczownika (związek zgody).",
+      "poziomTrudnosci": 2,
+      "etykieta": "Fleksja"
+    },
+    {
+      "pytanie": "Jaka jest dodatkowa cecha morfologiczna przymiotników (poza odmianą)?",
+      "odpowiedz": "Stopniowanie (stopień równy, wyższy, najwyższy), które wyraża natężenie danej cechy.",
+      "poziomTrudnosci": 2,
+      "etykieta": "Fleksja"
+    },
+    {
+      "pytanie": "Jak odmieniają się liczebniki główne?",
+      "odpowiedz": "Przez przypadki oraz w ograniczony sposób przez rodzaje (wyróżniając zwłaszcza kategorię męskoosobowości).",
+      "poziomTrudnosci": 2,
+      "etykieta": "Fleksja"
+    },
+    {
+      "pytanie": "Jak odmieniają się liczebniki porządkowe?",
+      "odpowiedz": "Odmieniają się dokładnie tak samo jak przymiotniki: przez przypadki, liczby i rodzaje.",
+      "poziomTrudnosci": 2,
+      "etykieta": "Fleksja"
+    },
+    {
+      "pytanie": "Jakie specyficzne cechy mają liczebniki zbiorowe?",
+      "odpowiedz": "Łączą się z ograniczonymi grupami rzeczowników (np. parami oczu, dziećmi) i odmieniają się przez przypadki.",
+      "poziomTrudnosci": 2,
+      "etykieta": "Fleksja"
+    },
+    {
+      "pytanie": "Przez co odmienia się czasownik (kategorie główne)?",
+      "odpowiedz": "Przez osoby (1, 2, 3), liczby (pojedyncza, mnoga), czasy (np. teraźniejszy) i tryby (oznajmujący, rozkazujący, przypuszczający).",
+      "poziomTrudnosci": 2,
+      "etykieta": "Fleksja"
+    },
+    {
+      "pytanie": "Kiedy czasownik odmienia się przez rodzaje?",
+      "odpowiedz": "Tylko w czasie przeszłym, czasie przyszłym złożonym oraz w trybie przypuszczającym.",
+      "poziomTrudnosci": 2,
+      "etykieta": "Fleksja"
+    },
+    {
+      "pytanie": "Co to jest rdzeń w wyrazie?",
+      "odpowiedz": "To morfem główny, niosący podstawowe i pierwotne znaczenie leksykalne, wspólny dla całej rodziny wyrazów.",
+      "poziomTrudnosci": 2,
+      "etykieta": "Morfologia"
+    },
+    {
+      "pytanie": "Co to jest przedrostek (prefiks)?",
+      "odpowiedz": "Morfem słowotwórczy dodawany przed rdzeniem wyrazu.",
+      "poziomTrudnosci": 2,
+      "etykieta": "Morfologia"
+    },
+    {
+      "pytanie": "Co to jest przyrostek (sufiks)?",
+      "odpowiedz": "Morfem słowotwórczy występujący bezpośrednio po rdzeniu, a przed końcówką fleksyjną.",
+      "poziomTrudnosci": 2,
+      "etykieta": "Morfologia"
+    },
+    {
+      "pytanie": "Co to jest wrostek (interfiks)?",
+      "odpowiedz": "Morfem wewnątrz wyrazu pełniący funkcję łącznika między dwoma rdzeniami w wyrazach złożonych (np. woda-o-mierze -> o).",
+      "poziomTrudnosci": 2,
+      "etykieta": "Morfologia"
+    },
+    {
+      "pytanie": "Co to jest końcówka fleksyjna?",
+      "odpowiedz": "Morfem występujący na końcu wyrazu, służący do tworzenia form gramatycznych (odmiany).",
+      "poziomTrudnosci": 2,
+      "etykieta": "Morfologia"
+    },
+    {
+      "pytanie": "Co jest podstawową funkcją afiksów (morfemów słowotwórczych)?",
+      "odpowiedz": "Tworzenie nowych wyrazów na bazie wyrazów już istniejących.",
+      "poziomTrudnosci": 2,
+      "etykieta": "Słowotwórstwo"
+    },
+    {
+      "pytanie": "Jak afiksy wpływają na słowo podstawowe?",
+      "odpowiedz": "Mogą modyfikować jego znaczenie (np. tworząc zdrobnienie) lub przenosić je do innej części mowy (np. z czasownika robiąc rzeczownik).",
+      "poziomTrudnosci": 2,
+      "etykieta": "Słowotwórstwo"
+    },
+    {
+      "pytanie": "Co to jest wyraz podstawowy?",
+      "odpowiedz": "Słowo, które służy jako bezpośrednia baza (forma i znaczenie) do utworzenia nowego słowa.",
+      "poziomTrudnosci": 2,
+      "etykieta": "Słowotwórstwo"
+    },
+    {
+      "pytanie": "Co to jest wyraz pochodny (derywat)?",
+      "odpowiedz": "Nowe słowo utworzone od wyrazu podstawowego za pomocą dodania morfemów słowotwórczych (formantów).",
+      "poziomTrudnosci": 2,
+      "etykieta": "Słowotwórstwo"
+    },
+    {
+      "pytanie": "Jaka jest relacja znaczeniowa między wyrazem podstawowym a pochodnym?",
+      "odpowiedz": "Znaczenie wyrazu pochodnego musi zawierać w sobie znaczenie wyrazu podstawowego (np. 'domek' to 'mały dom').",
+      "poziomTrudnosci": 2,
+      "etykieta": "Słowotwórstwo"
+    },
+    {
+      "pytanie": "Co to jest temat słowotwórczy?",
+      "odpowiedz": "To ta część wyrazu podstawowego, która w nienaruszonej (lub lekko oboczonej) formie przechodzi do nowo tworzonego wyrazu pochodnego.",
+      "poziomTrudnosci": 2,
+      "etykieta": "Słowotwórstwo"
+    },
+    {
+      "pytanie": "Jak wyznacza się temat słowotwórczy?",
+      "odpowiedz": "Poprzez odrzucenie końcówki fleksyjnej od wyrazu podstawowego w jego odpowiedniej formie.",
+      "poziomTrudnosci": 2,
+      "etykieta": "Słowotwórstwo"
+    },
+    {
+      "pytanie": "Jaka jest funkcja przyimka?",
+      "odpowiedz": "Wskazuje relacje przestrzenne, czasowe, przyczynowe lub celowe w zdaniu. Łączy się z innymi wyrazami w wyrażenia przyimkowe.",
+      "poziomTrudnosci": 2,
+      "etykieta": "Gramatyka"
+    },
+    {
+      "pytanie": "Czym jest 'rządzenie przypadkiem' przez przyimek?",
+      "odpowiedz": "Przyimek łączy się z określoną częścią mowy (np. rzeczownikiem) i narzuca jej użycie w konkretnym, wymaganym przez siebie przypadku.",
+      "poziomTrudnosci": 2,
+      "etykieta": "Gramatyka"
+    },
+    {
+      "pytanie": "Jaka jest funkcja partykuły?",
+      "odpowiedz": "Modyfikuje znaczenie, nadaje odcień emocjonalny lub uwydatnia treść całego wypowiedzenia bądź pojedynczego wyrazu.",
+      "poziomTrudnosci": 2,
+      "etykieta": "Gramatyka"
+    },
+    {
+      "pytanie": "Podaj 3 przykłady funkcji pełnionych przez partykuły.",
+      "odpowiedz": "Mogą tworzyć pytania (czy), przeczenia (nie), przypuszczenia (by) lub wzmacniać ekspresję (że, no).",
+      "poziomTrudnosci": 2,
+      "etykieta": "Gramatyka"
+    },
+    {
+      "pytanie": "Co to jest równoważnik zdania?",
+      "odpowiedz": "Wypowiedzenie, które pełni funkcję komunikacyjną zdania i przekazuje zamkniętą myśl, ale nie zawiera osobowej formy czasownika (orzeczenia).",
+      "poziomTrudnosci": 2,
+      "etykieta": "Składnia"
+    },
+    {
+      "pytanie": "Z jakich elementów może składać się równoważnik zdania?",
+      "odpowiedz": "Z bezokolicznika, imiesłowu, samego rzeczownika (np. 'Uwaga pies') lub przymiotnika (np. 'Wspaniale!'). Odbiorca domyśla się czasownika.",
+      "poziomTrudnosci": 2,
+      "etykieta": "Składnia"
+    },
+    {
+      "pytanie": "Na czym polega składnia zgody?",
+      "odpowiedz": "Relacja, w której wyraz podrzędny kopiuje (dostosowuje) swoje formy gramatyczne (przypadek, liczbę, rodzaj) do wyrazu nadrzędnego.",
+      "poziomTrudnosci": 2,
+      "etykieta": "Składnia"
+    },
+    {
+      "pytanie": "Podaj przykład związku zgody.",
+      "odpowiedz": "Relacja rzeczownika i przymiotnika: 'dobry uczeń', gdzie przymiotnik przyjmuje formy rzeczownika. Zmiana nadrzędnika wymusza zmianę podrzędnika.",
+      "poziomTrudnosci": 2,
+      "etykieta": "Składnia"
+    },
+    {
+      "pytanie": "Na czym polega składnia rządu?",
+      "odpowiedz": "Wyraz nadrzędny narzuca wyrazowi podrzędnemu konkretny, stały przypadek gramatyczny. Forma podrzędnika nie zmienia się przy odmianie nadrzędnika.",
+      "poziomTrudnosci": 2,
+      "etykieta": "Składnia"
+    },
+    {
+      "pytanie": "Podaj przykład związku rządu.",
+      "odpowiedz": "Czasownik i rzeczownik: 'czytam (co?) książkę' (biernik). Mimo zmiany na 'czytałbym (co?) książkę', przypadek podrzędnika zostaje ten sam.",
+      "poziomTrudnosci": 2,
+      "etykieta": "Składnia"
+    },
+    {
+      "pytanie": "Na czym polega składnia przynależności?",
+      "odpowiedz": "Wyraz podrzędny (często nieodmienny) łączy się z nadrzędnym wyłącznie pod względem znaczeniowym, nie przyjmując żadnej narzuconej formy gramatycznej.",
+      "poziomTrudnosci": 2,
+      "etykieta": "Składnia"
+    },
+    {
+      "pytanie": "Podaj przykład związku przynależności.",
+      "odpowiedz": "Czasownik i przysłówek: 'biec szybko'. 'Szybko' po prostu przylega znaczeniowo do czasownika, nie odmieniając się.",
+      "poziomTrudnosci": 2,
+      "etykieta": "Składnia"
+    },
+    {
+      "pytanie": "Co to jest grupa podmiotu?",
+      "odpowiedz": "To podmiot (główny wykonawca czynności) wraz ze wszystkimi słowami, które go określają (przydawkami).",
+      "poziomTrudnosci": 2,
+      "etykieta": "Składnia"
+    },
+    {
+      "pytanie": "Co to jest grupa orzeczenia?",
+      "odpowiedz": "To orzeczenie (czasownik) wraz ze wszystkimi słowami, które go określają: dopełnieniami (obiekty) i okolicznikami (okoliczności).",
+      "poziomTrudnosci": 2,
+      "etykieta": "Składnia"
+    },
+    {
+      "pytanie": "Czym charakteryzują się zdania złożone współrzędnie łączne?",
+      "odpowiedz": "Czynności w nich opisane współistnieją w czasie (np. 'Świeci słońce i wieje wiatr'). Spójniki: i, oraz, ani.",
+      "poziomTrudnosci": 2,
+      "etykieta": "Składnia"
+    },
+    {
+      "pytanie": "Czym charakteryzują się zdania złożone współrzędnie rozłączne?",
+      "odpowiedz": "Czynności w nich opisane wykluczają się wzajemnie, zachodzi wybór (np. 'Pójdę do kina albo zostanę w domu').",
+      "poziomTrudnosci": 2,
+      "etykieta": "Składnia"
+    },
+    {
+      "pytanie": "Czym charakteryzują się zdania złożone współrzędnie przeciwstawne?",
+      "odpowiedz": "Czynności i treści zdań przeczą sobie nawzajem, są w opozycji (np. 'Uczyłem się długo, ale nie zdałem').",
+      "poziomTrudnosci": 2,
+      "etykieta": "Składnia"
+    },
+    {
+      "pytanie": "Czym charakteryzują się zdania złożone współrzędnie wynikowe?",
+      "odpowiedz": "Drugie zdanie jest logicznym rezultatem i skutkiem pierwszego (np. 'Zrobiło się zimno, więc ubrałem kurtkę').",
+      "poziomTrudnosci": 2,
+      "etykieta": "Składnia"
+    },
+    {
+      "pytanie": "Jaka jest zasada budowy zdania złożonego podrzędnie?",
+      "odpowiedz": "Jedno zdanie (nadrzędne) jest określane przez drugie (podrzędne), które pełni wobec pierwszego funkcję uzupełniającej części zdania.",
+      "poziomTrudnosci": 2,
+      "etykieta": "Składnia"
+    },
+    {
+      "pytanie": "Od czego zależą rodzaje zdań złożonych podrzędnie?",
+      "odpowiedz": "Od pytania, na które odpowiada zdanie podrzędne (np. odpowiadając na 'jaki?' mamy zdanie podrzędne przydawkowe).",
+      "poziomTrudnosci": 2,
+      "etykieta": "Składnia"
+    },
+    {
+      "pytanie": "Co to jest anakolut?",
+      "odpowiedz": "Błąd składniowy; zaburzenie logiczno-gramatycznej konstrukcji zdania, gdzie człony nie łączą się zgodnie z poprawnymi regułami.",
+      "poziomTrudnosci": 2,
+      "etykieta": "Kultura języka"
+    },
+    {
+      "pytanie": "Jaki jest najczęstszy przykład anakolutu?",
+      "odpowiedz": "Błędne użycie imiesłowowego równoważnika zdania (gdy podmioty w zdaniach się nie zgadzają), np. 'Idąc do szkoły, spadł deszcz'.",
+      "poziomTrudnosci": 2,
+      "etykieta": "Kultura języka"
+    },
+    {
+      "pytanie": "Co to jest intencja komunikacyjna?",
+      "odpowiedz": "Główny cel, zamysł i motywacja nadawcy, kierująca nim podczas formułowania i wysyłania komunikatu do odbiorcy.",
+      "poziomTrudnosci": 2,
+      "etykieta": "Pragmatyka"
+    },
+    {
+      "pytanie": "Dlaczego forma języka może mieć różne znaczenie pragmatyczne w zależności od intencji?",
+      "odpowiedz": "Ponieważ np. pytanie 'Czy masz zegarek?' może nie być pytaniem o posiadanie przedmiotu, ale intencjonalną prośbą o podanie godziny.",
+      "poziomTrudnosci": 2,
+      "etykieta": "Pragmatyka"
+    },
+    {
+      "pytanie": "Czym są akty asertywne (wg Searle'a)?",
+      "odpowiedz": "To wypowiedzi będące stwierdzeniami, orzekaniem o stanie rzeczy i relacjonowaniem faktów.",
+      "poziomTrudnosci": 2,
+      "etykieta": "Pragmatyka"
+    },
+    {
+      "pytanie": "Czym są akty dyrektywne i komisywne (wg Searle'a)?",
+      "odpowiedz": "Dyrektywne skłaniają odbiorcę do działania (rozkazy, prośby). Komisywne to zobowiązania mówiącego do przyszłego działania (obietnice).",
+      "poziomTrudnosci": 2,
+      "etykieta": "Pragmatyka"
+    },
+    {
+      "pytanie": "Czym są akty deklaratywne (wg Searle'a)?",
+      "odpowiedz": "To akty, które natychmiastowo zmieniają stan rzeczywistości mocą wypowiedzianych słów instytucjonalnych (np. 'zwalniam pana').",
+      "poziomTrudnosci": 2,
+      "etykieta": "Pragmatyka"
+    },
+    {
+      "pytanie": "Na czym polega maksyma ilości (wg Grice'a)?",
+      "odpowiedz": "Nakazuje przekazywać w konwersacji dokładnie tyle informacji, ile jest w danym momencie niezbędne (nie za dużo, nie za mało).",
+      "poziomTrudnosci": 2,
+      "etykieta": "Pragmatyka"
+    },
+    {
+      "pytanie": "Na czym polega maksyma jakości i stosunku (wg Grice'a)?",
+      "odpowiedz": "Jakość to wymóg mówienia prawdy. Stosunek to wymóg mówienia ściśle na temat i unikania dygresji.",
+      "poziomTrudnosci": 2,
+      "etykieta": "Pragmatyka"
+    },
+    {
+      "pytanie": "Na czym polega maksyma sposobu (wg Grice'a)?",
+      "odpowiedz": "Nakazuje dbanie o jasność przekazu, zwięzłość i bezwzględne unikanie wieloznaczności.",
+      "poziomTrudnosci": 2,
+      "etykieta": "Pragmatyka"
+    },
+    {
+      "pytanie": "Czym są warunki fortunności?",
+      "odpowiedz": "To konieczne warunki, które muszą zostać spełnione, aby dany akt mowy został uznany za skuteczny i ważny społecznie.",
+      "poziomTrudnosci": 2,
+      "etykieta": "Pragmatyka"
+    },
+    {
+      "pytanie": "Jakie są warunki fortunności dla aktów informatywnych i obligatoryjnych?",
+      "odpowiedz": "Dla informatywnych: szczerość i kompetencja językowa. Dla obligatoryjnych: realna wola i fizyczna możliwość wywiązania się ze zobowiązania.",
+      "poziomTrudnosci": 2,
+      "etykieta": "Pragmatyka"
+    },
+    {
+      "pytanie": "Jakie są warunki fortunności dla aktów konstytutywnych (deklaratywnych)?",
+      "odpowiedz": "Wymagają wypowiedzenia przez odpowiednio uprawnioną osobę w wysoce sformalizowanych, prawnych lub instytucjonalnych okolicznościach.",
+      "poziomTrudnosci": 2,
+      "etykieta": "Pragmatyka"
+    },
+    {
+      "pytanie": "Czym zajmuje się dialektologia?",
+      "odpowiedz": "Jest to dział językoznawstwa, który bada terytorialne odmiany języka (głównie mowę ludu, gwary).",
+      "poziomTrudnosci": 2,
+      "etykieta": "Dialektologia"
+    },
+    {
+      "pytanie": "Wymień trzy regionalne odmiany polszczyzny ogólnej.",
+      "odpowiedz": "Polszczyzna poznańska, polszczyzna krakowska oraz polszczyzna warszawska.",
+      "poziomTrudnosci": 2,
+      "etykieta": "Dialektologia"
+    },
+    {
+      "pytanie": "Co to jest dialekt ludowy?",
+      "odpowiedz": "Terytorialna odmiana języka używana głównie przez ludność wiejską na rozległym obszarze, mająca swoiste cechy fonetyczne i słownikowe.",
+      "poziomTrudnosci": 2,
+      "etykieta": "Dialektologia"
+    },
+    {
+      "pytanie": "Jakie jest pięć głównych dialektów ludowych na terenie Polski?",
+      "odpowiedz": "Wielkopolski, małopolski, śląski, mazowiecki oraz chełmińsko-kociewsko-warmiński.",
+      "poziomTrudnosci": 2,
+      "etykieta": "Dialektologia"
+    }
+  ]
+}

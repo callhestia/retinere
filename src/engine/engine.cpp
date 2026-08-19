@@ -6,19 +6,24 @@
 
 using namespace std;
 
+// Normalize: lowercase + strip leading/trailing whitespace
+static string znormalizuj(const string& s) {
+    size_t a = s.find_first_not_of(" \t\r\n");
+    if (a == string::npos) return "";
+    size_t b = s.find_last_not_of(" \t\r\n");
+    string r = s.substr(a, b - a + 1);
+    transform(r.begin(), r.end(), r.begin(), [](unsigned char c){ return tolower(c); });
+    return r;
+}
+
 // & przeciw redundancji
 int obliczStatusOdpowiedzi(const string& odpowiedz, const Fiszka& fiszka, float prog) {
-    
-    if (odpowiedz == fiszka.odpowiedz) {
-        return 0; //bezbledn
-    }
+    const string odp = znormalizuj(odpowiedz);
+    const string ans = znormalizuj(fiszka.odpowiedz);
 
-    // zdefiniowane i liczone w pliku Levenshtein.cpp.
-    if (czyBladDopuszczalny(odpowiedz, fiszka.odpowiedz, prog)){
-        return 1;
-    }
-
-    return 2; // def
+    if (odp == ans) return 0;
+    if (czyBladDopuszczalny(odp, ans, prog)) return 1;
+    return 2;
 }
 
 // consty wczytywane z config.hpp.
@@ -38,15 +43,13 @@ static Fiszka aktualizujFiszke(Fiszka fiszka, int ocena) {
 }
 
 static int przeliczBladNaOcene(const string& odpowiedzUzytkownika, const string& poprawnaOdpowiedz) {
+    const string odp = znormalizuj(odpowiedzUzytkownika);
+    const string ans = znormalizuj(poprawnaOdpowiedz);
+    int maxDlugosc = static_cast<int>(max(odp.length(), ans.length()));
     
-    int maxDlugosc = static_cast<int>(max(odpowiedzUzytkownika.length(), poprawnaOdpowiedz.length()));
-    
-    if (maxDlugosc == 0) {
-        return 5;
-    }
+    if (maxDlugosc == 0) return 5;
 
-    // Wywołanie głównej funkcji liczącej z pliku Levenshtein.cpp
-    int odleglosc = obliczOdleglosc(odpowiedzUzytkownika, poprawnaOdpowiedz);
+    int odleglosc = obliczOdleglosc(odp, ans);
     double wspolczynnikBledu = static_cast<double>(odleglosc) / static_cast<double>(maxDlugosc);
 
     // Przeliczanie na oceny

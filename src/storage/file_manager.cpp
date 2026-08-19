@@ -29,118 +29,348 @@ using namespace std;
 // Runtime-override deck path; nadpisywany przez flage --deck w main.cpp
 string g_sciezkaTalii = PLIK_TALII;
 
-// Funkcja wczytująca wszystkie fiszki z pliku do wektora
-vector<Fiszka> wczytajTalie(){
-    vector<Fiszka> deck;
-    std::locale loc;
-    try {
-        loc = std::locale("");
-    } catch (...) {
-        loc = std::locale::classic();
+// Human-readable name of the currently loaded deck.
+string g_deckName = "";
+
+// ── JSON helpers ─────────────────────────────────────────────────────────
+
+static string jsonEsc(const string& s) {
+    string r;
+    for (unsigned char c : s) {
+        if      (c == '"')  r += "\\\"";
+        else if (c == '\\') r += "\\\\";
+        else if (c == '\n') r += "\\n";
+        else if (c == '\r') r += "\\r";
+        else if (c == '\t') r += "\\t";
+        else if (c < 0x20)  {}
+        else                r += (char)c;
     }
+    return r;
+}
 
-    ifstream file;
-    file.imbue(loc); // Przypisanie lokalizacji do strumienia pliku
-    file.open(g_sciezkaTalii);
-    if (!file.is_open()) {
-        // Common fallback candidates (relative to cwd)
-        std::vector<std::string> candidates;
-        candidates.push_back(std::string("decks/deck.txt"));
-        candidates.push_back(std::string("../decks/deck.txt"));
-        candidates.push_back(std::string("../../decks/deck.txt"));
-
-        // Try paths relative to the executable directory
-        char exePathBuf[PATH_MAX];
-        exePathBuf[0] = '\0';
-#if defined(__APPLE__)
-        uint32_t size = sizeof(exePathBuf);
-        if (_NSGetExecutablePath(exePathBuf, &size) == 0) {
-            // success
+// Parse a JSON string value; pos must be right after the opening '"'.
+// Advances pos past the closing '"'.
+static string jsonParseStr(const string& src, size_t& pos) {
+    string r;
+    while (pos < src.size()) {
+        char c = src[pos++];
+        if (c == '"') return r;
+        if (c == '\\' && pos < src.size()) {
+            char e = src[pos++];
+            switch (e) {
+                case '"':  r += '"';  break;
+                case '\\': r += '\\'; break;
+                case '/':  r += '/';  break;
+                case 'n':  r += '\n'; break;
+                case 'r':  r += '\r'; break;
+                case 't':  r += '\t'; break;
+                default:   r += e;    break;
+            }
+        } else {
+            r += c;
         }
-#elif defined(__linux__)
-        ssize_t len = readlink("/proc/self/exe", exePathBuf, sizeof(exePathBuf) - 1);
-        if (len != -1) exePathBuf[len] = '\0';
-#elif defined(_WIN32)
-        GetModuleFileNameA(NULL, exePathBuf, PATH_MAX);
-#endif
-        std::string exeDir;
-        if (exePathBuf[0] != '\0') {
-            std::string exePathStr = exePathBuf;
-            auto pos = exePathStr.find_last_of("/\\");
-            if (pos != std::string::npos) exeDir = exePathStr.substr(0, pos);
-        }
+    }
+    return r;
+}
 
-        if (!exeDir.empty()) {
-            candidates.push_back(exeDir + "/decks/deck.txt");
-            candidates.push_back(exeDir + "/../decks/deck.txt");
-        }
-
-        bool found = false;
-        std::string pathToOpen = g_sciezkaTalii;
-        for (const auto &cand : candidates) {
-            if (std::filesystem::exists(cand)) {
-                pathToOpen = cand;
-                file.open(pathToOpen);
-                if (file.is_open()) { found = true; break; }
+// Parse a complete JSON array of card objects: [{...}, ...]
+// pos must point at the opening '['.
+static vector<Fiszka> parseCardsArray(const string& src, size_t& pos) {
+    vector<Fiszka> deck;
+    auto ws = [&]() {
+        while (pos < src.size() && (unsigned char)src[pos] <= ' ') ++pos;
+    };
+    if (pos >= src.size() || src[pos] != '[') return deck;
+    ++pos;
+    while (pos < src.size()) {
+        ws();
+        if (pos >= src.size() || src[pos] == ']') { ++pos; break; }
+        if (src[pos] == ',') { ++pos; continue; }
+        if (src[pos] != '{') { ++pos; continue; }
+        ++pos;
+        Fiszka card;
+        bool hasQ = false;
+        while (pos < src.size()) {
+            ws();
+            if (pos >= src.size()) break;
+            if (src[pos] == '}') { ++pos; break; }
+            if (src[pos] == ',') { ++pos; continue; }
+            if (src[pos] != '"') { ++pos; continue; }
+            ++pos;
+            string key = jsonParseStr(src, pos);
+            ws();
+            if (pos < src.size() && src[pos] == ':') ++pos;
+            ws();
+            if (pos >= src.size()) break;
+            if (src[pos] == '"') {
+                ++pos;
+                string val = jsonParseStr(src, pos);
+                if      (key == "pytanie")   { card.pytanie   = val; hasQ = true; }
+                else if (key == "odpowiedz") { card.odpowiedz = val; }
+                else if (key == "etykieta")  { card.etykieta  = val; }
+            } else {
+                size_t end = src.find_first_of(",}\n", pos);
+                if (end == string::npos) end = src.size();
+                string num = src.substr(pos, end - pos);
+                while (!num.empty() && (unsigned char)num.back() <= ' ') num.pop_back();
+                pos = end;
+                if (key == "poziomTrudnosci" && !num.empty())
+                    try { card.poziomTrudnosci = stod(num); } catch (...) {}
             }
         }
-
-        if (!file.is_open()) {
-            // create an empty file at original path so subsequent saves will work
-            std::ofstream newFile(g_sciezkaTalii);
-            newFile.imbue(loc);
-            return deck;
-        }
-        // if we opened a fallback candidate, update global path so saves go to same file
-        if (pathToOpen != g_sciezkaTalii) g_sciezkaTalii = pathToOpen;
+        if (hasQ) deck.push_back(card);
     }
+    return deck;
+}
+
+// Parse a complete JSON deck — handles two formats:
+//   New wrapped:  {"name": "...", "cards": [...]}
+//   Legacy plain: [...]
+static vector<Fiszka> parseJsonDeck(const string& src) {
+    vector<Fiszka> deck;
+    size_t pos = 0;
+    auto ws = [&]() {
+        while (pos < src.size() && (unsigned char)src[pos] <= ' ') ++pos;
+    };
+    ws();
+    if (pos >= src.size()) return deck;
+
+    if (src[pos] == '[') {
+        // Legacy plain array — keep g_deckName as-is
+        return parseCardsArray(src, pos);
+    }
+
+    if (src[pos] == '{') {
+        // New wrapped format: {"name": "...", "cards": [...]}
+        ++pos;
+        while (pos < src.size()) {
+            ws();
+            if (pos >= src.size() || src[pos] == '}') break;
+            if (src[pos] == ',') { ++pos; continue; }
+            if (src[pos] != '"') { ++pos; continue; }
+            ++pos;
+            string key = jsonParseStr(src, pos);
+            ws();
+            if (pos < src.size() && src[pos] == ':') ++pos;
+            ws();
+            if (pos >= src.size()) break;
+            if (key == "name" && src[pos] == '"') {
+                ++pos;
+                g_deckName = jsonParseStr(src, pos);
+            } else if (key == "cards" && src[pos] == '[') {
+                deck = parseCardsArray(src, pos);
+            } else {
+                // Skip unknown value
+                int depth = 0;
+                while (pos < src.size()) {
+                    char c = src[pos++];
+                    if (c == '{' || c == '[') ++depth;
+                    else if (c == '}' || c == ']') { if (--depth < 0) { --pos; break; } }
+                    else if (c == '"') { jsonParseStr(src, pos); }
+                    else if ((c == ',' || c == '}') && depth == 0) { --pos; break; }
+                }
+            }
+        }
+        return deck;
+    }
+
+    return deck;
+}
+
+
+// Backward-compat: parse old pipe-separated TXT format
+static vector<Fiszka> parseTxtDeck(ifstream& file) {
+    vector<Fiszka> deck;
     string line;
-    while(getline(file, line)){
-        if(line.empty()) continue;
+    while (getline(file, line)) {
+        if (line.empty()) continue;
         stringstream ss(line);
         string item;
         Fiszka card;
-        try{
-            getline(ss,card.pytanie, '|');
-            getline(ss,card.odpowiedz,'|');
-            getline(ss,item,'|'); card.poziomTrudnosci = stod(item);
-
-            // Migracja: stary format mial tu pole combo (liczba calkowita),
-            // nowy format ma od razu etykieta. Rozrozniamy po obecnosci '|' w reszcie.
+        try {
+            getline(ss, card.pytanie,   '|');
+            getline(ss, card.odpowiedz, '|');
+            getline(ss, item,           '|');
+            card.poziomTrudnosci = stod(item);
             string rest;
             getline(ss, rest);
             auto sep = rest.find('|');
             if (sep != string::npos) {
-                // Stary format: combo|etykieta — pomijamy combo, bierzemy etykieta
-                string tagPart = rest.substr(sep + 1);
-                if (!tagPart.empty()) card.etykieta = tagPart;
+                string tag = rest.substr(sep + 1);
+                if (!tag.empty()) card.etykieta = tag;
             } else {
-                // Nowy format lub stary bez tagu: sprawdz czy to cyfry (stare combo)
-                bool sameLiczby = !rest.empty();
-                for (char c : rest) if (!isdigit(c)) { sameLiczby = false; break; }
-                if (!sameLiczby) card.etykieta = rest;
+                bool onlyDigits = !rest.empty();
+                for (char c : rest) if (!isdigit(c)) { onlyDigits = false; break; }
+                if (!onlyDigits) card.etykieta = rest;
             }
-
             deck.push_back(card);
-        }
-        catch(...){
-            continue; // Pominięcie błędnie sformatowanych linii, np. brak pola poziomTrudnosci lub inne problemy z konwersją
-        }
+        } catch (...) { continue; }
     }
-    file.close();
     return deck;
 }
 
-// Funkcja zapisująca aktualny stan wektora z powrotem do pliku tekstowego
-void zapiszTalie(const vector<Fiszka>& deck){
-    
-    ofstream file;
-    file.open(g_sciezkaTalii);
-    if(!file.is_open()) return;
-    for(const auto& card : deck){
-        file<<card.pytanie<<"|"<<card.odpowiedz<<"|"<<card.poziomTrudnosci<<"|"<<card.etykieta<<"\n";
+// Resolve the executable directory (same logic as gui_main.cpp)
+static string getExeDirFM() {
+    char buf[PATH_MAX];
+    buf[0] = '\0';
+#if defined(__linux__)
+    ssize_t len = readlink("/proc/self/exe", buf, sizeof(buf) - 1);
+    if (len != -1) buf[len] = '\0';
+#elif defined(__APPLE__)
+    uint32_t sz = sizeof(buf);
+    if (_NSGetExecutablePath(buf, &sz) != 0) buf[0] = '\0';
+#elif defined(_WIN32)
+    GetModuleFileNameA(NULL, buf, PATH_MAX);
+#endif
+    if (buf[0] == '\0') return "";
+    string p(buf);
+    auto pos = p.find_last_of("/\\");
+    return (pos != string::npos) ? p.substr(0, pos) : "";
+}
+
+// Funkcja wczytujaca fiszki z pliku JSON (z automatyczna migracja z TXT)
+vector<Fiszka> wczytajTalie() {
+    vector<Fiszka> deck;
+    const string exeDir = getExeDirFM();
+
+    // ── Try JSON candidates ───────────────────────────────────────────────
+    vector<string> jsonCandidates = {
+        g_sciezkaTalii,
+        "decks/deck.json",
+        "../decks/deck.json",
+        "../../decks/deck.json",
+    };
+    if (!exeDir.empty()) {
+        jsonCandidates.push_back(exeDir + "/decks/deck.json");
+        jsonCandidates.push_back(exeDir + "/../decks/deck.json");
     }
-    file.close();
+    for (const auto& path : jsonCandidates) {
+        ifstream f(path);
+        if (!f.is_open()) continue;
+        stringstream ss;
+        ss << f.rdbuf();
+        deck = parseJsonDeck(ss.str());
+        if (path != g_sciezkaTalii) g_sciezkaTalii = path;
+        return deck;
+    }
+
+    // ── Migration: try old TXT candidates ────────────────────────────────
+    vector<string> txtCandidates = {
+        "decks/deck.txt",
+        "../decks/deck.txt",
+        "../../decks/deck.txt",
+    };
+    if (!exeDir.empty()) {
+        txtCandidates.push_back(exeDir + "/decks/deck.txt");
+        txtCandidates.push_back(exeDir + "/../decks/deck.txt");
+    }
+    for (const auto& path : txtCandidates) {
+        ifstream f(path);
+        if (!f.is_open()) continue;
+        deck = parseTxtDeck(f);
+        // Derive JSON path by replacing .txt extension
+        string jsonPath = path;
+        auto dot = jsonPath.rfind(".txt");
+        if (dot != string::npos) jsonPath.replace(dot, 4, ".json");
+        g_sciezkaTalii = jsonPath;
+        // Auto-save in new format
+        zapiszTalie(deck);
+        return deck;
+    }
+
+    // ── Nothing found: ensure directory exists for future saves ──────────
+    try {
+        auto dir = filesystem::path(g_sciezkaTalii).parent_path();
+        if (!dir.empty()) filesystem::create_directories(dir);
+    } catch (...) {}
+    return deck;
+}
+
+// Zapisuje talie w formacie JSON: {"name":"...","cards":[...]}
+void zapiszTalie(const vector<Fiszka>& deck) {
+    try {
+        auto dir = filesystem::path(g_sciezkaTalii).parent_path();
+        if (!dir.empty()) filesystem::create_directories(dir);
+    } catch (...) {}
+
+    ofstream file(g_sciezkaTalii);
+    if (!file.is_open()) return;
+
+    file << "{\n"
+         << "  \"name\": \"" << jsonEsc(g_deckName) << "\",\n"
+         << "  \"cards\": [\n";
+    for (size_t i = 0; i < deck.size(); ++i) {
+        const auto& c = deck[i];
+        file << "    {\n"
+             << "      \"pytanie\": \""       << jsonEsc(c.pytanie)        << "\",\n"
+             << "      \"odpowiedz\": \""     << jsonEsc(c.odpowiedz)      << "\",\n"
+             << "      \"poziomTrudnosci\": "  << c.poziomTrudnosci         << ",\n"
+             << "      \"etykieta\": \""      << jsonEsc(c.etykieta)       << "\"\n"
+             << "    }";
+        if (i + 1 < deck.size()) file << ",";
+        file << "\n";
+    }
+    file << "  ]\n}\n";
+}
+
+// Resolves the best existing decks/ directory, trying several candidates.
+static string findDecksDir() {
+    const string exeDir = getExeDirFM();
+    vector<string> candidates = { "decks", "../decks", "../../decks" };
+    if (!exeDir.empty()) {
+        candidates.push_back(exeDir + "/decks");
+        candidates.push_back(exeDir + "/../decks");
+    }
+    for (const auto& d : candidates)
+        if (filesystem::exists(d) && filesystem::is_directory(d)) return d;
+    // Fall back to the directory of the current deck file
+    auto parent = filesystem::path(g_sciezkaTalii).parent_path().string();
+    return parent.empty() ? "decks" : parent;
+}
+
+// Skanuje katalog decks/ i zwraca liste dostepnych plikow JSON.
+vector<DeckInfo> listujTalie() {
+    vector<DeckInfo> result;
+    string dir = findDecksDir();
+    try {
+        for (const auto& entry : filesystem::directory_iterator(dir)) {
+            if (entry.path().extension() != ".json") continue;
+            string path = entry.path().string();
+            ifstream f(path);
+            if (!f.is_open()) continue;
+            stringstream ss; ss << f.rdbuf();
+            string content = ss.str();
+            // Try to read "name" field
+            string name;
+            size_t p = content.find("\"name\"");
+            if (p != string::npos) {
+                p = content.find(':', p);
+                if (p != string::npos) {
+                    ++p;
+                    while (p < content.size() && (unsigned char)content[p] <= ' ') ++p;
+                    if (p < content.size() && content[p] == '"') {
+                        ++p;
+                        name = jsonParseStr(content, p);
+                    }
+                }
+            }
+            if (name.empty()) name = entry.path().stem().string();
+            result.push_back({path, name});
+        }
+    } catch (...) {}
+    return result;
+}
+
+// Tworzy nowy pusty plik talii.
+bool stworzTalie(const string& filename, const string& name) {
+    string dir = findDecksDir();
+    try { filesystem::create_directories(dir); } catch (...) {}
+    string path = dir + "/" + filename;
+    if (filesystem::exists(path)) return false; // nie nadpisuj
+    ofstream f(path);
+    if (!f.is_open()) return false;
+    f << "{\n  \"name\": \"" << jsonEsc(name) << "\",\n  \"cards\": []\n}\n";
+    return true;
 }
 
 // Wczytuje główny tryb nauki
@@ -163,8 +393,8 @@ int wczytajKonfiguracje(){
     return mode;
 }
 
-// Zapisuje wybrane ustawienia (tryb nauki i tryb literówek) do pliku konfiguracyjnego
-void zapiszKonfiguracje(int studyMode, int typoMode) {
+// Zapisuje wybrane ustawienia (tryb nauki, tryb literówek, język) do pliku konfiguracyjnego
+void zapiszKonfiguracje(int studyMode, int typoMode, const std::string& language) {
     std::locale loc;
     try {
         loc = std::locale("");
@@ -176,7 +406,7 @@ void zapiszKonfiguracje(int studyMode, int typoMode) {
     file.imbue(loc);
     file.open(PLIK_KONFIGURACJI);
     if(file.is_open()){
-        file << studyMode << "\n" << typoMode << "\n";
+        file << studyMode << "\n" << typoMode << "\n" << language << "\n";
     }
 }
 // Wczytuje ustawienie tolerancji na literówki
@@ -187,6 +417,16 @@ int wczytajTrybLiterowek() {
     file >> studyMode >> typoMode;
     if (file.fail()) typoMode = TRYB_NORMALNY; // backward compat: stary config bez linii 2
     return typoMode;
+}
+// Wczytuje kod języka interfejsu (linia 3 config.txt)
+std::string wczytajJezyk() {
+    ifstream file(PLIK_KONFIGURACJI);
+    if (!file.is_open()) return "pl";
+    int studyMode = 0, typoMode = 0;
+    std::string lang;
+    file >> studyMode >> typoMode >> lang;
+    if (file.fail() || lang.empty()) return "pl";
+    return lang;
 }
 
 // Pobiera dane o passie użytkownika

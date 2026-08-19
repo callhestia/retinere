@@ -1,0 +1,155 @@
+{
+  "name": "Materiały Budowlane",
+  "cards": [
+    {
+      "pytanie": "Czym jest nasiąkliwość materiału budowlanego?",
+      "odpowiedz": "Stosunek masy wody wchłoniętej przez materiał do jego masy w stanie suchym (nasiąkliwość wagowa) lub do jego objętości (nasiąkliwość objętościowa).",
+      "poziomTrudnosci": 1.3,
+      "etykieta": "Materiały Budowlane"
+    },
+    {
+      "pytanie": "Co to jest mrozoodporność materiału?",
+      "odpowiedz": "Zdolność nasyconego wodą materiału do znoszenia wielokrotnego, naprzemiennego zamrażania i rozmrażania bez widocznych oznak zniszczenia i bez spadku wytrzymałości.",
+      "poziomTrudnosci": 1.85,
+      "etykieta": "Materiały Budowlane"
+    },
+    {
+      "pytanie": "Czym różni się cement portlandzki (CEM I) od cementu hutniczego (CEM III)?",
+      "odpowiedz": "CEM I składa się niemal wyłącznie z klinkieru portlandzkiego, podczas gdy CEM III zawiera dodatek żużla wielkopiecowego, co daje mu wyższą odporność na agresję chemiczną i niższe ciepło hydratacji.",
+      "poziomTrudnosci": 1.3,
+      "etykieta": "Materiały Budowlane"
+    },
+    {
+      "pytanie": "Co to jest klinkier portlandzki?",
+      "odpowiedz": "Podstawowy składnik cementu, otrzymywany przez wypalenie w temperaturze ok. 1450°C zmielonej mieszanki wapienia i gliny.",
+      "poziomTrudnosci": 1.3,
+      "etykieta": "Materiały Budowlane"
+    },
+    {
+      "pytanie": "Czym są spoiwa powietrzne?",
+      "odpowiedz": "Spoiwa mineralne, które wiążą i twardnieją wyłącznie na powietrzu (np. wapno budowlane powietrzne, gips budowlany).",
+      "poziomTrudnosci": 2,
+      "etykieta": "Materiały Budowlane"
+    },
+    {
+      "pytanie": "Czym są spoiwa hydrauliczne?",
+      "odpowiedz": "Spoiwa mineralne, które po zarobieniu wodą wiążą i twardnieją zarówno na powietrzu, jak i pod wodą (np. cement, wapno hydrauliczne).",
+      "poziomTrudnosci": 2,
+      "etykieta": "Materiały Budowlane"
+    },
+    {
+      "pytanie": "Co określa klasa wytrzymałości betonu (np. C20/25)?",
+      "odpowiedz": "Wytrzymałość charakterystyczną na ściskanie po 28 dniach w MPa: pierwsza liczba dotyczy próbki walcowej (20 MPa), a druga sześciennej (25 MPa).",
+      "poziomTrudnosci": 2,
+      "etykieta": "Materiały Budowlane"
+    },
+    {
+      "pytanie": "Jaka jest rola stali w betonie zbrojonym (żelbecie)?",
+      "odpowiedz": "Stal zbrojeniowa przejmuje głównie naprężenia rozciągające, na które sam beton ma bardzo niską odporność.",
+      "poziomTrudnosci": 2,
+      "etykieta": "Materiały Budowlane"
+    },
+    {
+      "pytanie": "Co to jest współczynnik przewodzenia ciepła (lambda)?",
+      "odpowiedz": "Parametr określający zdolność materiału do przewodzenia ciepła; im mniejsza wartość lambda [W/(m·K)], tym lepszy izolator termiczny.",
+      "poziomTrudnosci": 2,
+      "etykieta": "Materiały Budowlane"
+    },
+    {
+      "pytanie": "Czym charakteryzuje się wełna mineralna w porównaniu do styropianu (EPS)?",
+      "odpowiedz": "Wełna mineralna jest całkowicie niepalna (klasa A1) i ma wysoką paroprzepuszczalność, ale jest bardziej nasiąkliwa i cięższa od styropianu.",
+      "poziomTrudnosci": 2,
+      "etykieta": "Materiały Budowlane"
+    },
+    {
+      "pytanie": "Co to jest styrodur (XPS - polistyren ekstrudowany)?",
+      "odpowiedz": "Materiał termoizolacyjny o zamkniętej strukturze komórkowej, charakteryzujący się bardzo niską nasiąkliwością, wysoką wytrzymałością na ściskanie i lepszą izolacyjnością niż EPS.",
+      "poziomTrudnosci": 2,
+      "etykieta": "Materiały Budowlane"
+    },
+    {
+      "pytanie": "Jakie są podstawowe rodzaje kruszyw stosowanych w budownictwie?",
+      "odpowiedz": "Kruszywa naturalne (piasek, żwir), łamane (grys, tłuczeń ze skał litych) oraz sztuczne/lekkie (keramzyt, perlit, żużel).",
+      "poziomTrudnosci": 2,
+      "etykieta": "Materiały Budowlane"
+    },
+    {
+      "pytanie": "Co to jest keramzyt?",
+      "odpowiedz": "Lekkie kruszywo sztuczne otrzymywane przez wypalanie pęczniejących glin w piecach obrotowych w temp. ok. 1150°C; stosowane do betonów lekkich i izolacji.",
+      "poziomTrudnosci": 2,
+      "etykieta": "Materiały Budowlane"
+    },
+    {
+      "pytanie": "Co to jest korozja biologiczna drewna?",
+      "odpowiedz": "Niszczenie struktury drewna przez organizmy żywe, przede wszystkim grzyby (powodujące zgniliznę) oraz owady ksylofagiczne (techniczne szkodniki drewna).",
+      "poziomTrudnosci": 2,
+      "etykieta": "Materiały Budowlane"
+    },
+    {
+      "pytanie": "Co oznacza wilgotność punktu nasycenia włókien drewna (ok. 28-30%)?",
+      "odpowiedz": "Stan, w którym ściany komórkowe drewna są maksymalnie nasycone wodą związaną, a w pustkach nie ma wody wolnej; powyżej tej wilgotności drewno nie pęcznieje.",
+      "poziomTrudnosci": 2,
+      "etykieta": "Materiały Budowlane"
+    },
+    {
+      "pytanie": "Czym jest cegła klinkierowa?",
+      "odpowiedz": "Cegła ceramiczna wypalana w temp. ok. 1100°C do stopnia silnego spieczenia, o bardzo niskiej nasiąkliwości (<6%), wysokiej wytrzymałości i mrozoodporności.",
+      "poziomTrudnosci": 2,
+      "etykieta": "Materiały Budowlane"
+    },
+    {
+      "pytanie": "Co to jest beton komórkowy (np. gazobeton)?",
+      "odpowiedz": "Lekki materiał o porowatej strukturze z piasku, wapna, cementu i środka poryzującego (np. proszku aluminiowego), łączący funkcję konstrukcyjną z termoizolacyjną.",
+      "poziomTrudnosci": 2,
+      "etykieta": "Materiały Budowlane"
+    },
+    {
+      "pytanie": "Czym różnią się papy asfaltowe tradycyjne od termozgrzewalnych?",
+      "odpowiedz": "Papy termozgrzewalne mają osnowę z włókna szklanego lub poliestru i modyfikowany asfalt (SBS/APP), co daje im znacznie wyższą elastyczność, trwałość i odporność na starzenie.",
+      "poziomTrudnosci": 2,
+      "etykieta": "Materiały Budowlane"
+    },
+    {
+      "pytanie": "Co jest główną przyczyną korozji zbrojenia w betonie?",
+      "odpowiedz": "Karbonatyzacja betonu (obniżenie pH poniżej 9 pod wpływem CO2) lub wniknięcie jonów chlorkowych, co niszczy naturalną warstwę pasywną na stali.",
+      "poziomTrudnosci": 2,
+      "etykieta": "Materiały Budowlane"
+    },
+    {
+      "pytanie": "Co to jest gips budowlany (półwodny siarczan wapnia)?",
+      "odpowiedz": "Spoiwo powietrzne otrzymywane przez prażenie kamienia gipsowego w temp. 130-180°C; charakteryzuje się szybkim czasem wiązania, ale niską odpornością na wilgoć.",
+      "poziomTrudnosci": 2,
+      "etykieta": "Materiały Budowlane"
+    },
+    {
+      "pytanie": "Czym jest moduł Younga (moduł sprężystości podłużnej)?",
+      "odpowiedz": "Wielkość określająca sztywność materiału – stosunek naprężenia do odkształcenia sprężystego przy rozciąganiu lub ściskaniu.",
+      "poziomTrudnosci": 2,
+      "etykieta": "Materiały Budowlane"
+    },
+    {
+      "pytanie": "Co to są wyroby silikatowe (cegła wapienno-piaskowa)?",
+      "odpowiedz": "Materiały ścienne z piasku kwarcowego, wapna i wody, hartowane w autoklawach pod ciśnieniem pary wodnej; cechują się wysoką gęstością i izolacyjnością akustyczną.",
+      "poziomTrudnosci": 2,
+      "etykieta": "Materiały Budowlane"
+    },
+    {
+      "pytanie": "Jakie zastosowanie ma szkło wodne w budownictwie?",
+      "odpowiedz": "Stosowane jako dodatek przyspieszający wiązanie cementu, do uszczelniania betonów przed wilgocią, impregnacji ogniochronnej oraz produkcji farb krzemianowych.",
+      "poziomTrudnosci": 2,
+      "etykieta": "Materiały Budowlane"
+    },
+    {
+      "pytanie": "Co to jest skurcz betonu?",
+      "odpowiedz": "Zmniejszanie się objętości betonu w czasie jego twardnienia i wysychania na powietrzu, co może prowadzić do powstawania rys i pęknięć.",
+      "poziomTrudnosci": 2,
+      "etykieta": "Materiały Budowlane"
+    },
+    {
+      "pytanie": "Czym różni się zaprawa murarska od betonu?",
+      "odpowiedz": "Zaprawa murarska składa się ze spoiwa, wody i drobnego kruszywa (piasku do 2 mm), natomiast beton zawiera dodatkowo kruszywo grube (żwir, grys).",
+      "poziomTrudnosci": 2,
+      "etykieta": "Materiały Budowlane"
+    }
+  ]
+}

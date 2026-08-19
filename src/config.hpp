@@ -3,7 +3,7 @@
 constexpr const char* APP_NAME = "Retinere";
 
 // Sciezki plikow danych (wzgledem katalogu roboczego; nadpisywalne przez g_sciezkaTalii)
-constexpr const char* PLIK_TALII   = "decks/deck.txt";
+constexpr const char* PLIK_TALII   = "decks/deck.json";
 constexpr const char* PLIK_KONFIGURACJI = "data/config.txt";
 constexpr const char* PLIK_SERII = "data/streak.txt";
 constexpr const char* PLIK_DZIENNY  = "data/daily.txt";  // cel dnia + dzienny postep
